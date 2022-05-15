@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import SignInScreen from './src/screens/authScreens/SignInScreen';
+import WelcomeSignin from './src/screens/authScreens/WelcomeSignin';
 
 export default function App() {
   return (
@@ -10,7 +11,7 @@ export default function App() {
       backgroundColor="orange"
       />
 
-      <SignInScreen/>
+      <WelcomeSignin />
       
     </View>
   );

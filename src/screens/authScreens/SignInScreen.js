@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput, Button} from 'react-native'
+import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput} from 'react-native'
 import Header from '../../components/Header';
 import {colors, parameter, title, } from "../../global/style"
-import { Icon } from 'react-native-elements'
+import { Icon, Button } from 'react-native-elements'
 
 export default function SignInScreen() {
 
@@ -41,13 +41,30 @@ export default function SignInScreen() {
                 </View> 
             </View>
 
-            <View>
+            <View style = {{marginHorizontal: 20, marginVertical: 20}}>
                 <Button
                 title = "SIGN IN"
                 buttonStyle = {parameter.styledButton}
                 titleStyle = {parameter.buttonTitle}
                 />
             </View>
+
+            <View style = {{alignItems: "center"}}>
+                <Text style = {{...styles.text, textDecoration: "underline"}}> Forgot Password? </Text>
+            </View> 
+
+            <View style = {{alignItems: "center", marginTop: 20}}>
+                <Text style = {{fontSize: 20, fontWeight: "bold"}}> OR </Text>
+            </View> 
+
+            <View style = {{marginHorizontal: 20, marginTop: 30 }}>
+                <Button
+                        title = "Create Account"
+                        buttonStyle = {parameter.styledButton}
+                        titleStyle = {parameter.buttonTitle}
+                        />
+            </View>
+
         </View>
     )
 }
