@@ -4,23 +4,25 @@ import {SafeAreaView, View, Text, StyleSheet, Dimensions} from 'react-native'
 import {colors, parameter} from "../global/style"
 import { Icon } from 'react-native-elements'
 
-export default function Header({title,type}) {
+export default function Header({title,type,navigation}) {
 
     return (
-        <SafeAreaView style = {styles.header}>
-            <View style = {{marginLeft:20}}>
+        <View style = {styles.header}>
+            <View style = {{marginLeft:20, marginTop: 20}}>
                 <Icon
                     type = "material-community"
                     name = {type}
                     color = "white"                
                     size = {28}
-                    onPress = {() => {}}
+                    onPress = {() => {
+                        navigation.goBack()
+                    }}
                 />
             </View>
-            <View> 
+            <View style = {{marginTop: 20}}> 
                 <Text style = {styles.headerText}> {title} </Text>
             </View>
-        </SafeAreaView> 
+        </View> 
     )
 }
 

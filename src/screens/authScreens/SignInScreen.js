@@ -5,11 +5,11 @@ import Header from '../../components/Header';
 import {colors, parameter, title, } from "../../global/style"
 import { Icon, Button } from 'react-native-elements'
 
-export default function SignInScreen() {
+export default function SignInScreen({navigation}) {
 
     return (
         <View style = {styles.container}> 
-            <Header title = "My Account" type = "arrow-left" />
+            <Header title = "My Account" type = "arrow-left" navigation = {navigation} />
 
             <View style = {{marginLeft:20, marginTop:10}}>
                 <Text style = {title}> Sign-in </Text>
@@ -27,13 +27,7 @@ export default function SignInScreen() {
                     />
                 </View>
                 <View style = {styles.textInput2}>
-                    <View>
-                        <Icon
-                        name = "lock"
-                        iconStyle = {{color: colors.grey1}}
-                        type = "material"
-                        />
-                    </View>
+                    
                 <TextInput
                     style = {{width: "80%"}}
                     placeholder = "Password"
@@ -46,6 +40,9 @@ export default function SignInScreen() {
                 title = "SIGN IN"
                 buttonStyle = {parameter.styledButton}
                 titleStyle = {parameter.buttonTitle}
+                onPress = {() => {
+                    navigation.navigate("HomeScreen")
+                }}
                 />
             </View>
 

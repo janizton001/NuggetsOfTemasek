@@ -5,8 +5,9 @@ import Header from '../../components/Header';
 import {colors, parameter, title, } from "../../global/style"
 import { Icon , Button } from 'react-native-elements'
 import { color } from 'react-native-elements/dist/helpers';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function WelcomeSignin() {
+export default function WelcomeSignin({navigation}) {
 
     return (
         <View style = {{flex: 1}}>
@@ -28,6 +29,9 @@ export default function WelcomeSignin() {
                     title = "SIGN IN"
                     buttonStyle = {parameter.styledButton}
                     titleStyle = {parameter.buttonTitle}
+                    onPress = {() => {
+                        navigation.navigate("SignInScreen")
+                    }}
                     />
             </View>
 

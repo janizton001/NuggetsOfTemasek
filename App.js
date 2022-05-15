@@ -1,18 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import SignInScreen from './src/screens/authScreens/SignInScreen';
-import WelcomeSignin from './src/screens/authScreens/WelcomeSignin';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text, View, StatusBar} from 'react-native';
+import { registerRootComponent } from 'expo';
+import { colors } from './src/global/style';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import RootNavigator from './src/navigation/RootNavigator';
+import AuthStack from './src/navigation/Navigator';
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar 
       barStyle = "light-content"
-      backgroundColor="orange"
+      backgroundColor = {colors.grey1}
       />
-
-      <WelcomeSignin />
-      
+    <RootNavigator />
     </View>
   );
 }
