@@ -20,7 +20,7 @@ export default function HomeHeader() {
             </View>
 
             <View style = {{justifyContent: 'center', alignItems : "center", marginLeft: 50, marginRight: 40}}> 
-                <Text style = {{color: "white", fontSize :"26", fontWeight : "bold"}}> Nuggets of NUS</Text>
+                <Text style = {{color: "white", fontSize :26, fontWeight : "bold"}}> Nuggets of NUS</Text>
             </View>
             <View style = {{flex:  5, justifyContent: 'center', alignItems : "center"}}>
                 <CartIcon 

@@ -1,17 +1,20 @@
 import React from 'react';
 
-import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView} from 'react-native'
+import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList,} from 'react-native'
 import { colors, Icon } from 'react-native-elements';
+import FoodCard from '../components/FoodCard';
 import HomeHeader from '../components/HomeHeader';
+import { restaurantData } from '../global/Data';
 
+const SCREEN_WIDTH = Dimensions.get('window').width
 
 export default function HomeScreen() {
 
     return (
         <View style = {styles.container}>
             <HomeHeader />
-            <ScrollView
-            showsVerticalScrollIndicator = {true}>
+            <View>
+            
             <View style ={{marginTop: 15, marginLeft: 10}}>
                 <Text style = {{fontSize: 20, fontWeight: "bold"}}> Food Near You </Text>
             </View>
@@ -34,7 +37,27 @@ export default function HomeScreen() {
                     />
                 </View>
             </View>
-            </ScrollView>
+            </View>
+            
+                <FlatList
+                    style = {{marginTop: 15, marginBottom: 2}}
+                    showsVerticalScrollIndicator = {true}
+                    data = {restaurantData}
+                    keyExtractor = {(item,index) => index.toString()}
+                    renderItem = {({item}) => (
+                        <View> 
+                            <FoodCard 
+                                screenWidth={SCREEN_WIDTH * 0.90}
+                                image = {item.image}
+                                name = {item.name}
+                                distAway = {item.distAway}
+                                address = {item.address}
+                                collectTime = {item.collectTime}
+                            />
+                        </View>
+                    )}
+                />
+            
         </View>
     )
 }

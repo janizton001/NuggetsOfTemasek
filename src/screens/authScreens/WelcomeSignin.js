@@ -19,7 +19,7 @@ export default function WelcomeSignin({navigation}) {
             <View style = {styles.logo}> 
                 <Image 
                 source = {{uri: "https://www.seekpng.com/png/detail/237-2372204_gold-nugget-png-chicken-nuggets-four-chicken-breast.png"}}
-                style = {{width: "60%", height: "100%"}}
+                style = {{width: "70%", height: 150}}
                 />
             </View>
 

@@ -1,0 +1,4 @@
+export const restaurantData = [
+    {name: "Deck", distAway: "1.2", address: "2 Computing Drive", image: "https://www.seekpng.com/png/detail/237-2372204_gold-nugget-png-chicken-nuggets-four-chicken-breast.png",collectTime: 5,},
+    {name: "Science Canteen", distAway: "1.2", address: "2 Computing Drive", image: "https://www.seekpng.com/png/detail/237-2372204_gold-nugget-png-chicken-nuggets-four-chicken-breast.png",collectTime: 5,},
+    {name: "Supper Stretch", distAway: "1.2", address: "2 Computing Drive", image: "https://www.seekpng.com/png/detail/237-2372204_gold-nugget-png-chicken-nuggets-four-chicken-breast.png",collectTime: 5,}]
