@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput} from 'react-native'
 import Header from '../../components/Header';
 import {colors, parameter, title, } from "../../global/style"
 import { Icon, Button } from 'react-native-elements'
+import { auth } from '../../../firebase';
 
 export default function SignInScreen({navigation}) {
-
+    
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    
+    const handleSignUp = () => {
+        auth
+        .createUserWithEmailAndPassword(email,password)
+        .then (userCredentials => {
+            const user = userCredentials.user;
+            console.log(user.email);
+        })
+        .catch(error => alert(error.message))
+    }
+    
     return (
         <View style = {styles.container}> 
             <Header title = "My Account" type = "arrow-left" navigation = {navigation} />
@@ -24,6 +38,8 @@ export default function SignInScreen({navigation}) {
                     <TextInput
                     style = {styles.textInput1}
                     placeholder = "Email"
+                    value= {email}
+                    onChangeText = {text => setEmail(text)}
                     />
                 </View>
                 <View style = {styles.textInput2}>
@@ -31,6 +47,8 @@ export default function SignInScreen({navigation}) {
                 <TextInput
                     style = {{width: "80%"}}
                     placeholder = "Password"
+                    value = {password}
+                    onChangeText = {text => setPassword(text)}
                     />
                 </View> 
             </View>
@@ -47,7 +65,7 @@ export default function SignInScreen({navigation}) {
             </View>
 
             <View style = {{alignItems: "center"}}>
-                <Text style = {{...styles.text, textDecoration: "underline"}}> Forgot Password? </Text>
+                <Text style = {{...styles.text}}> Forgot Password? </Text>
             </View> 
 
             <View style = {{alignItems: "center", marginTop: 20}}>
@@ -59,6 +77,7 @@ export default function SignInScreen({navigation}) {
                         title = "Create Account"
                         buttonStyle = {parameter.styledButton}
                         titleStyle = {parameter.buttonTitle}
+                        onPress = {handleSignUp}
                         />
             </View>
 
