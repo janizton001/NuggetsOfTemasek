@@ -77,7 +77,7 @@ export default function SignInScreen({navigation}) {
                         title = "Create Account"
                         buttonStyle = {parameter.styledButton}
                         titleStyle = {parameter.buttonTitle}
-                        onPress = {handleSignUp}
+                        onPress = {() => {navigation.navigate("SignUpScreen")}}
                         />
             </View>
 
