@@ -76,7 +76,7 @@ export default function SignInScreen({navigation}) {
             </View>
 
             <View style = {{alignItems: "center"}}>
-                <Text style = {{...styles.text, textDecoration: "underline"}}> Forgot Password? </Text>
+                <Text style = {{...styles.text}}> Forgot Password? </Text>
             </View> 
 
             <View style = {{alignItems: "center", marginTop: 20}}>
