@@ -10,7 +10,6 @@ export default function SignInScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    // navigate to HomeScreen if user is valid
    const {login} = useContext(AuthContext)
    
     return (

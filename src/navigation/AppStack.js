@@ -5,32 +5,68 @@ import {Icon} from 'react-native-elements'
 import HomeScreen from '../screens/HomeScreen';
 import MyOrdersScreen from '../screens/MyOrdersScreen'
 import MyAccountScreen from '../screens/MyAccountScreen'
+import EditProfileScreen from '../screens/EditProfileScreen';
 
 const App = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const FeedStack = ({navigation}) => (
-    <Tab.Navigator>
-      <Tab.Screen
-      name="HomeScreen"
-      component={HomeScreen}
-      options ={
-        {
-            tabBarLabel : "Home",
-            tabBarIcon: ({color,size})=>(
-                <Icon 
-                    name ='home'
-                    type = 'material'
-                    color ={color}
-                    size ={size}
-                />
-            )
-        }
-    }
-      />
-       <Tab.Screen 
-                name ="MyOrdersScreen"
-                component ={MyOrdersScreen}
+const HomeStack = ({navigation}) => (
+    <App.Navigator>
+        <App.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        />
+      </App.Navigator>
+)   
+
+const OrderStack = ({navigation}) => (
+    <App.Navigator>
+        <App.Screen
+        name ="MyOrdersScreen"
+        component ={MyOrdersScreen}
+        />
+      </App.Navigator>
+)
+
+const AccountStack = ({navigation}) => (
+    <App.Navigator>
+        <App.Screen
+        name ="MyAccount"
+        component ={MyAccountScreen}
+       
+        />
+        <App.Screen
+        name = "EditProfileScreen"
+        component={EditProfileScreen}
+        />
+      </App.Navigator>
+)  
+    
+
+export default function AppStack(){
+
+    return(
+        <Tab.Navigator>
+            <Tab.Screen 
+                name ="Home"
+                component ={HomeStack}
+                options ={
+                    {
+                        tabBarLabel : "Home",
+                        tabBarIcon: ({color,size})=>(
+                            <Icon 
+                                name ='home'
+                                type = 'material'
+                                color ={color}
+                                size ={size}
+                            />
+                        )
+                    }
+                }
+            />
+            <Tab.Screen
+                name = "Orders"
+                component = {OrderStack}
                 options ={
                     {
                         tabBarLabel : "My Orders",
@@ -44,12 +80,10 @@ const FeedStack = ({navigation}) => (
                         )
                     }
                 }
-
             />
-
-        <Tab.Screen 
-                name ="MyAccount"
-                component ={MyAccountScreen}
+             <Tab.Screen
+                name = "Account"
+                component = {AccountStack}
                 options ={
                     {
                         tabBarLabel : "My Account",
@@ -63,22 +97,7 @@ const FeedStack = ({navigation}) => (
                         )
                     }
                 }
-
             />
-
-        
-    
-    </Tab.Navigator>
-);
-
-export default function AppStack(){
-
-    return(
-        <App.Navigator>
-            <App.Screen 
-                name ="App"
-                component ={FeedStack}
-            />
-        </App.Navigator>    
+        </Tab.Navigator>    
     )
 }
