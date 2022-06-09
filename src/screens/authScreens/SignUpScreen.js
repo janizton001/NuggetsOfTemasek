@@ -1,24 +1,20 @@
 import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useContext } from 'react'
 import {colors, parameter, title, } from "../../global/style"
 import Header from '../../components/Header';
 import { Icon, Button } from 'react-native-elements'
 import { auth } from '../../../NoT';
+import { AuthContext } from '../../navigation/AuthContext';
 
 
 const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [firstName, setFN] = useState('')
+  const [lastName, setLN] = useState('')
+  const [mobileNumber, setMN] = useState('')
 
-  const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log('Registered with:', user.email);
-      })
-      .catch(error => alert(error.message))
-  }
+  const {register} = useContext(AuthContext)
   
   return (
     <View style = {styles.container}>
@@ -37,6 +33,8 @@ const SignUpScreen = ({navigation}) => {
                     <TextInput
                     style = {styles.textInput1}
                     placeholder = "Mobile Number"
+                    value = {mobileNumber}
+                    onChangeText = {text => setMN(text)}
                     />
                 </View>
 
@@ -44,6 +42,8 @@ const SignUpScreen = ({navigation}) => {
                     <TextInput
                     style = {styles.textInput1}
                     placeholder = "First Name"
+                    value = {firstName}
+                    onChangeText = {text => setFN(text)}
                     />
                 </View>
 
@@ -51,6 +51,8 @@ const SignUpScreen = ({navigation}) => {
                     <TextInput
                     style = {styles.textInput1}
                     placeholder = "Last Name"
+                    value = {lastName}
+                    onChangeText = {text => setLN(text)}
                     />
                 </View>
 
@@ -79,7 +81,7 @@ const SignUpScreen = ({navigation}) => {
                         title = "Sign me UP!"
                         buttonStyle = {parameter.styledButton}
                         titleStyle = {parameter.buttonTitle}
-                        onPress = {handleSignUp}
+                        onPress = {() => (register(email,password,firstName,lastName,mobileNumber))}
                         />
             </View>
             <View style ={styles.view20}>

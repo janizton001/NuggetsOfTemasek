@@ -1,35 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput} from 'react-native'
 import Header from '../../components/Header';
 import {colors, parameter, title, } from "../../global/style"
 import { Icon, Button } from 'react-native-elements'
 import { auth } from '../../../NoT';
+import { AuthContext } from '../../navigation/AuthContext';
 
 export default function SignInScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
+
     // navigate to HomeScreen if user is valid
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-          if (user) {
-            navigation.navigate("HomeScreen")
-          }
-        })
-    
-        return unsubscribe
-      }, [])
-
-    const handleLogin = () => {
-        auth
-          .signInWithEmailAndPassword(email, password)
-          .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log('Logged in with:', user.email);
-          })
-          .catch(error => alert(error.message))
-      }
-
+   const {login} = useContext(AuthContext)
+   
     return (
         <View style = {styles.container}> 
             <Header title = "My Account" type = "arrow-left" navigation = {navigation} />
@@ -69,7 +52,7 @@ export default function SignInScreen({navigation}) {
                 buttonStyle = {parameter.styledButton}
                 titleStyle = {parameter.buttonTitle}
                 onPress = {
-                    handleLogin
+                    () => login(email,password)
                     //() => {navigation.navigate("SignUpScreen")}
                 }
                 />

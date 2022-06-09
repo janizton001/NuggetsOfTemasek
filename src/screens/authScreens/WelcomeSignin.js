@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useContext, useEffect} from 'react';
 
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput, Image} from 'react-native'
 import Header from '../../components/Header';
@@ -6,6 +6,7 @@ import {colors, parameter, title, } from "../../global/style"
 import { Icon , Button } from 'react-native-elements'
 import { color } from 'react-native-elements/dist/helpers';
 import { NavigationContainer } from '@react-navigation/native';
+
 
 export default function WelcomeSignin({navigation}) {
 
