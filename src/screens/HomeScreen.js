@@ -8,7 +8,7 @@ import { restaurantData } from '../global/Data';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
 
     return (
         <View style = {styles.container}>
@@ -47,12 +47,16 @@ export default function HomeScreen() {
                     renderItem = {({item}) => (
                         <View> 
                             <FoodCard 
+                                OnPressFoodCard={ () => {navigation.navigate("RestaurantScreen", {
+                                    item,
+                                })}}
                                 screenWidth={SCREEN_WIDTH * 0.90}
                                 image = {item.image}
                                 name = {item.name}
                                 distAway = {item.distAway}
                                 address = {item.address}
                                 collectTime = {item.collectTime}
+                                menu = {item.menu}
                             />
                         </View>
                     )}

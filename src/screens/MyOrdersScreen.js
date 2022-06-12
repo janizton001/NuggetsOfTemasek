@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, {useState, useEffect, useContext} from 'react';
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList,} from 'react-native'
 import { colors, Icon } from 'react-native-elements';
 

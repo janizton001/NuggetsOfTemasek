@@ -12,10 +12,11 @@ export default function FoodCard({
     address,
     image,
     screenWidth,
-    collectTime
+    collectTime,
+    menu
 }) {
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={OnPressFoodCard}>
             <View style ={{...styles.cardView, width:screenWidth, borderColor: colors.grey1}}>
                 <Image 
                 style ={{...styles.image,width: screenWidth}}

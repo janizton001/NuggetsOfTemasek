@@ -6,6 +6,8 @@ import HomeScreen from '../screens/HomeScreen';
 import MyOrdersScreen from '../screens/MyOrdersScreen'
 import MyAccountScreen from '../screens/MyAccountScreen'
 import EditProfileScreen from '../screens/EditProfileScreen';
+import RestaurantScreen from '../screens/RestaurantScreen';
+import ProductScreen from '../screens/ProductScreen';
 
 const App = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -15,6 +17,16 @@ const HomeStack = ({navigation}) => (
         <App.Screen
         name="HomeScreen"
         component={HomeScreen}
+        />
+
+         <App.Screen
+        name="RestaurantScreen"
+        component={RestaurantScreen}
+        />
+
+        <App.Screen
+        name="ProductScreen"
+        component={ProductScreen}
         />
       </App.Navigator>
 )   
