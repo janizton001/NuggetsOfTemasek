@@ -17,16 +17,25 @@ const HomeStack = ({navigation}) => (
         <App.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options ={{
+            headerShown: false,
+          }} 
         />
 
          <App.Screen
         name="RestaurantScreen"
         component={RestaurantScreen}
+        options ={{
+            headerShown: false,
+          }} 
         />
 
         <App.Screen
         name="ProductScreen"
         component={ProductScreen}
+        options ={{
+            headerShown: false,
+          }} 
         />
       </App.Navigator>
 )   
@@ -36,6 +45,9 @@ const OrderStack = ({navigation}) => (
         <App.Screen
         name ="MyOrdersScreen"
         component ={MyOrdersScreen}
+        options ={{
+            headerShown: false,
+          }} 
         />
       </App.Navigator>
 )
@@ -45,11 +57,17 @@ const AccountStack = ({navigation}) => (
         <App.Screen
         name ="MyAccount"
         component ={MyAccountScreen}
+        options ={{
+            headerShown: false,
+          }} 
        
         />
         <App.Screen
         name = "EditProfileScreen"
         component={EditProfileScreen}
+        options ={{
+            headerShown: false,
+          }} 
         />
       </App.Navigator>
 )  
@@ -63,7 +81,7 @@ export default function AppStack(){
                 name ="Home"
                 component ={HomeStack}
                 options ={
-                    {
+                    {   
                         tabBarLabel : "Home",
                         tabBarIcon: ({color,size})=>(
                             <Icon 

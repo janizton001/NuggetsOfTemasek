@@ -32,7 +32,7 @@ export default function RestaurantScreen({navigation,route}) {
            
                 <FlatList 
                     style ={{backgroundColor:'white'}}
-                    data = {menuDetailedData}
+                    data = {restaurant?.menu}
                     keyExtractor = {(item,index)=>index.toString()}
                     showsVerticalScrollIndicator = {true}
                     renderItem = {({item,index})=>(
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     tab:{ paddingTop :0,
           backgroundColor:colors.buttons,
           justifyContent:"space-between",
-         // alignItems:"center"
           },
     
     tabContainer:{ alignItems:'center',
