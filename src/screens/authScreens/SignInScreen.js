@@ -30,6 +30,12 @@ export default function SignInScreen({navigation}) {
           .catch(error => alert(error.message))
       }
 
+<<<<<<< Updated upstream
+=======
+   const {login, forgetPassword} = useContext(AuthContext)
+   
+   
+>>>>>>> Stashed changes
     return (
         <View style = {styles.container}> 
             <Header title = "My Account" type = "arrow-left" navigation = {navigation} />
@@ -75,7 +81,16 @@ export default function SignInScreen({navigation}) {
                 />
             </View>
 
-            <View style = {{alignItems: "center"}}>
+            <View style = {{marginHorizontal: 20, marginVertical: 20}}>
+                <Button
+                title = "Forgot Password"
+                buttonStyle = {parameter.styledButton}
+                titleStyle = {parameter.buttonTitle}
+                onPress = {
+                    () => forgetPassword(email)
+                    //() => {navigation.navigate("SignUpScreen")}
+                }
+                />
                 <Text style = {{...styles.text}}> Forgot Password? </Text>
             </View> 
 
