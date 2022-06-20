@@ -11,15 +11,14 @@ export default function FoodCard({
     distAway,
     address,
     image,
-    screenWidth,
     collectTime,
     menu
 }) {
     return(
-        <TouchableOpacity onPress={OnPressFoodCard}>
-            <View style ={{...styles.cardView, width:screenWidth, borderColor: colors.grey1}}>
+        <TouchableOpacity onPress={OnPressFoodCard} style ={{...styles.cardView}}>
+            <View style ={{width: '100%', borderColor: colors.grey1}}>
                 <Image 
-                style ={{...styles.image,width: screenWidth}}
+                style ={{...styles.image,width: '100%'}}
                 source = {{uri: image}}
                 />
             </View>
@@ -27,7 +26,7 @@ export default function FoodCard({
             <View style = {{borderColor: colors.grey1}}>
 
                 <View>
-                <Text style = {{fontSize: 18, fontWeight: "bold",marginLeft: 10}}> {name}</Text>
+                <Text style = {{fontSize: 18, fontWeight: "bold",marginLeft: 10, fontFamily: 'Arial'}}> {name}</Text>
                 </View>
 
                 <View style = {{flex:1, flexDirection: 'row'}}>
@@ -40,7 +39,7 @@ export default function FoodCard({
                             size = {17}
                             iconStyle = {{marginTop:3}}
                         />
-                        <Text style = {styles.description}> {distAway} Min </Text>
+                        <Text style = {styles.description}> {distAway} km </Text>
                     </View>
 
                     <View style = {{flex: 9, flexDirection: 'row'}}>
@@ -58,25 +57,23 @@ export default function FoodCard({
 
 const styles = StyleSheet.create({
     cardView: {
-        marginHorizontal: 10,
-        borderTopRightRadius: 5,
-        borderTopLeftRadius: 5,
+        marginHorizontal: 5,
         borderWidth: 1,
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        borderColor: colors.grey1,
+        borderRadius: 5,
+        borderColor: 'black',
+        marginTop: 10
     },
 
     image: {
         borderTopRightRadius: 5,
         borderTopLeftRadius: 10,
-        height: 200,
+        height: 180,
     },
 
     descriptionBox : {
         flex: 4,
         flexDirection: 'row',
-        borderRightColor: colors.grey3,
+        borderRightColor: 'black',
         paddingHorizontal: 5,
         marginLeft: 5,
         borderRightWidth: 1,

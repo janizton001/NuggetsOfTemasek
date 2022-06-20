@@ -1,19 +1,44 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 
-import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList,} from 'react-native'
-import { Button, colors, Icon } from 'react-native-elements';
+import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList, Alert, KeyboardAvoidingViewBase,} from 'react-native'
+import { colors, Icon } from 'react-native-elements';
 import { menuDetailedData } from '../global/Data';
 import ProductCard from '../components/ProductCard';
 import { parameter } from '../global/style';
 import { db } from '../../NoT';
+import { AuthContext } from '../navigation/AuthContext';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAvoidingView } from 'react-native-web';
+import { Button } from '@react-native-material/core';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
 export default function ProductScreen({navigation,route}) {
 
     const [product, setProduct] = useState(null) 
+    const [restaurant, setRestaurant] = useState(null) 
     const [count,setCount] = useState(0)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
+    const {user} = useContext(AuthContext);
+    const [userData, setUserData] = useState('');
+
+    const getUser = async() => {
+        db
+        .collection('user')
+        .doc(user.uid)
+        .get()
+        .then((documentSnapshot) => {
+          if( documentSnapshot.exists ) {
+            console.log('User Data', documentSnapshot.data());
+            setUserData(documentSnapshot.data());
+          }
+        })
+      }
+    
+      useEffect(() => {
+        getUser();
+    }, []);
+
 
     function decreaseCount() {
         if (count != 0) {
@@ -26,24 +51,33 @@ export default function ProductScreen({navigation,route}) {
     }
 
     useEffect( () => {
-        let {item} = route.params;
+        let {item,restaurant} = route.params;
         setProduct(item)
+        setRestaurant(restaurant)
     })
 
     const submitOrder = async () => {
-
+        
         if(count != 0) {
-        db
+            setLoading(true)
+        await db
         .collection('orders')
         .add({
             productName:  product?.meal,
             image: product?.image,
-            price: product?.price, 
-            quantity: count
+            price: product?.price,
+            restaurant: restaurant.name, 
+            quantity: count,
+            uid: user.uid,
+            status: "Not Accepted",
+            mobileNo: userData.mobileNumber
         })
         .then(() => {
-            setLoading(false)
+            
+            Alert.alert("Order added", "Check My Orders to see your order!")
             console.log("Order added to db");
+            setLoading(false)
+            
         })
         .catch((error) => {
             console.error("Error adding document: ", error);
@@ -51,7 +85,9 @@ export default function ProductScreen({navigation,route}) {
     }
 }
     return (
+        
         <View style ={styles.container}>
+            
             <View style ={styles.view1}>
                 <Icon 
                     name ="arrow-left"
@@ -63,20 +99,21 @@ export default function ProductScreen({navigation,route}) {
                 <Text style ={styles.text1}>{product?.meal}</Text>
             </View>
 
-           
+            
             <View>
                 <ProductCard 
                     productName ={product?.meal}
                     image ={product?.image}
                     price ={product?.price}
-                    
+                    restaurant = {restaurant?.name}
+                    uid = {user.uid}
                 />
             </View> 
-
-            <View style = {{justifyContent: 'center', marginTop: -70, alignItems: 'center',flexDirection: 'row'}}>
+            
+            <View style = {{justifyContent: 'center', marginTop: -120, alignItems: 'center',flexDirection: 'row'}}>
                 <Button
                     title = "-"
-                    buttonStyle = {{backgroundColor:'orange', width: 50}}
+                    color = '#FF8C00'
                     titleStyle = {parameter.buttonTitle}
                     onPress={() => decreaseCount()}
                 />
@@ -85,25 +122,35 @@ export default function ProductScreen({navigation,route}) {
                 </View>
                 <Button
                     title = "+"
-                    buttonStyle = {{backgroundColor:'orange', width: 50}}
+                    color = '#FF8C00'
                     titleStyle = {parameter.buttonTitle}
                     onPress={() => increaseCount()}
                 />
                 
             </View>
             
-
+    
             <View style = {styles.view3}>
-            <Button
-                title = "ADD TO CART"
-                buttonStyle = {parameter.styledButton}
-                titleStyle = {parameter.buttonTitle}
-                onPress = {submitOrder}
-                />
+            <TextInput
+                    style = {{width: "80%",backgroundColor: 'white',height: 50, borderRadius: 15}}
+                    placeholder = "Remarks"
+                    />
             </View>
-                        
-               
+            <View style = {styles.view3}>
+                
+            <Button
+                title = "ORDER NOW"
+                contentContainerStyle = {{height: 70, width:150}}
+                color = '#FF8C00'
+                tintColor = 'white'
+                loading = {loading}
+                onPress = {submitOrder}
+                variant = "contained"
+               /> 
+            </View>
+            
         </View>
+        
     )
 }
 

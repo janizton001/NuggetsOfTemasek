@@ -1,21 +1,17 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState,useContext,useEffect} from 'react';
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TouchableOpacity,Animated,ScrollView, FlatList,} from 'react-native'
-import { colors, parameter, Icon } from 'react-native-elements';
 import OrderCard from '../components/OrderCard';
 import { db } from '../../NoT';
-import { ActivityIndicator, RefreshControl } from 'react-native-web';
 import { Swipeable } from 'react-native-gesture-handler';
 import {query, collection, getDocs ,documentId } from "firebase/firestore";
 import { AuthContext } from '../navigation/AuthContext';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const SCREEN_WIDTH = Dimensions.get('window').width
-
-export default function MyOrdersScreen() {
+export default function AllDeliveries() {
 
     const [orders, setOrders] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
     const {user} = useContext(AuthContext)
-
     const ItemBox = (props) => {
         const leftSwipe = (progress, dragX) => {
           const scale = dragX.interpolate({
@@ -26,22 +22,22 @@ export default function MyOrdersScreen() {
           return (
             <View style = {{flexDirection: 'row'}}>
             <TouchableOpacity 
-            onPress={() => deleteOrder(props.id)}
+            onPress={() => acceptOrder(props.id)}
             activeOpacity={0.6}>
                 <View style={styles.deleteBox}>
                         <Animated.Text style={{transform: [{scale: scale}]}}>
-                        Delete
+                        Accept
                         </Animated.Text>
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={0.6}>
+            {/* <TouchableOpacity activeOpacity={0.6}>
                 <View style={styles.editBox}>
                     <Animated.Text style={{transform: [{scale: scale}]}}>
-                        Edit
+                        Reject
                     </Animated.Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             </View>
           );
         };
@@ -54,7 +50,6 @@ export default function MyOrdersScreen() {
                         price ={props.price}
                         quantity = {props.quantity}
                         status = {props.status}
-                        mobileNo = {props.mobileNo}
                     />
                 </View>
             </Swipeable>
@@ -69,10 +64,11 @@ export default function MyOrdersScreen() {
     const getOrders = async () => {
         try {
             const list = [];
-        
+            
             await db
             .collection('orders')
-            .where("uid", "==", user.uid)
+            .where("uid", "!=", user.uid)
+            .where("status", "==", "Not Accepted")
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) =>{
@@ -82,7 +78,7 @@ export default function MyOrdersScreen() {
                         quantity,
                         image,
                         status,
-                        mobileNo
+                        
                     } = doc.data();
                     const documentId = doc.id
                     list.push({
@@ -91,9 +87,10 @@ export default function MyOrdersScreen() {
                         quantity,
                         image,
                         documentId,
-                        status,
-                        mobileNo
+                        status
+                    
                     })
+                  
                   
                 })
             })
@@ -112,27 +109,26 @@ export default function MyOrdersScreen() {
         onRefresh();
     }, []);
 
-    const deleteOrder = (id) => {
+    const acceptOrder = (id) => {
         console.log('Current Order Id: ', id);
-    
+        
+
         db
           .collection('orders')
           .doc(id)
-          .delete()
+          .update({
+            status: 'Accepted'
+          })
           .then(() =>{
-            console.log("Order deleted")
+            console.log("Order accepted")
             onRefresh()
           })
+
     }
 
     return (
-        <View style ={styles.container}> 
-           <View style = {styles.header}>
-                <View style = {{justifyContent: 'center', alignItems : "center", marginLeft: 125}}> 
-                    <Text style = {{color: "white", fontSize :26, fontWeight : "bold"}}> My Orders</Text>
-                </View>
-            </View>   
-            
+        
+        <View style ={styles.container}>  
             <FlatList 
                     style ={{backgroundColor:'white'}}
                     data = {orders}
@@ -148,8 +144,7 @@ export default function MyOrdersScreen() {
                             image = {item.image}
                             id = {item.documentId}
                             status = {item.status}
-                            mobileNo = {item.mobileNo}
-                        />
+                            />
                     )}
 
                 
@@ -177,7 +172,7 @@ const styles = StyleSheet.create({
         },
 
         deleteBox: {
-            backgroundColor: '#F67469',
+            backgroundColor: '#88F583',
             justifyContent: 'center',
             alignItems: 'center',
             width: 60,
@@ -186,7 +181,7 @@ const styles = StyleSheet.create({
           },
 
           editBox: {
-            backgroundColor: 'lightblue',
+            backgroundColor: '#F67469',
             justifyContent: 'center',
             alignItems: 'center',
             alignContent: 'center',

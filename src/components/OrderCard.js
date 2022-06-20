@@ -2,20 +2,20 @@ import React from 'react';
 import {Text,View,Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {colors} from '../global/style'
 
-export default function OrderCard({productName,price,image, quantity}){
+export default function OrderCard({productName,price,image, quantity, status,onPressOrderCard}){
 
     
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPressOrderCard}>
         <View style ={styles.view1}>
             <View style ={styles.view2}>
                 <View style ={styles.view3}>
                     <Text style ={styles.text1}>{productName}</Text>
                     <View>
-                        <Text style ={styles.text2}> Quantity Ordered:{quantity}</Text>
+                        <Text style ={styles.text2}> Qty:{quantity}</Text>
                     </View>
-                    <Text style = {styles.text3}>S$ {price}</Text>
-                    <Text style = {styles.text3}>Status: Not Accepted...</Text>
+                    <Text style = {styles.text3}>Total Price: S$ {price * quantity}</Text>
+                    <Text style = {styles.text3}>Status: {status} </Text>
                 </View>
                 <View style ={{flex:3}}>
                      <Image style ={styles.image} source ={{uri:image}} />

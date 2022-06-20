@@ -4,7 +4,7 @@ import {colors} from '../global/style'
 
 
 
-export default function MenuCard({productName,price,image,productDetails,OnPressMenuCard}){
+export default function MenuCard({productName,price,image,productDetails,stall, OnPressMenuCard}){
     return(
         <TouchableOpacity onPress={OnPressMenuCard}>
         <View style ={styles.view1}>
@@ -12,7 +12,7 @@ export default function MenuCard({productName,price,image,productDetails,OnPress
                 <View style ={styles.view3}>
                     <Text style ={styles.text1}>{productName}</Text>
                     <View>
-                        <Text style ={styles.text2}>{productDetails}</Text>
+                        <Text style ={styles.text2}>{productDetails} from {stall}</Text>
                     </View>
                     <Text style = {styles.text3}>S$ {price}</Text>
                 </View>

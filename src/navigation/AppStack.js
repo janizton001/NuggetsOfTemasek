@@ -8,6 +8,7 @@ import MyAccountScreen from '../screens/MyAccountScreen'
 import EditProfileScreen from '../screens/EditProfileScreen';
 import RestaurantScreen from '../screens/RestaurantScreen';
 import ProductScreen from '../screens/ProductScreen';
+import MyDeliveriesScreen from '../screens/MyDeliveriesScreen';
 
 const App = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,7 +72,17 @@ const AccountStack = ({navigation}) => (
         />
       </App.Navigator>
 )  
-    
+const DeliveryStack = ({navigation}) => (
+    <App.Navigator>
+        <App.Screen
+        name ="MyDeliveries"
+        component ={MyDeliveriesScreen}
+        options ={{
+            headerShown: false,
+          }} 
+        />
+    </App.Navigator>
+)
 
 export default function AppStack(){
 
@@ -100,6 +111,24 @@ export default function AppStack(){
                 options ={
                     {
                         tabBarLabel : "My Orders",
+                        tabBarIcon: ({color,size})=>(
+                            <Icon 
+                                name ='view-list'
+                                type = 'material'
+                                color ={color}
+                                size ={size}
+                            />
+                        )
+                    }
+                }
+            />
+
+            <Tab.Screen
+                name = "Deliveries"
+                component = {DeliveryStack}
+                options ={
+                    {
+                        tabBarLabel : "Deliveries",
                         tabBarIcon: ({color,size})=>(
                             <Icon 
                                 name ='view-list'

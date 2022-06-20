@@ -3,11 +3,17 @@ import { StyleSheet, Text, View,Image } from 'react-native'
 
 import  {colors} from '../global/style'
 
-const ProductCard = ({productName,price,image}) => {
+const ProductCard = ({productName,price,image,restaurant,uid}) => {
     return (
         <View style = {styles.view1}>
+            
             <View style ={styles.view2}>
-                <View style ={styles.view3}>
+                <View style ={styles.view3}> 
+                <Text style ={{
+                    fontSize:25,
+                    color:colors.grey1,
+                    fontWeight: "bold"
+                    }}>{restaurant}  </Text>
                     <Text style ={styles.text1}>{productName}</Text>
                     <Text style ={styles.text1}>S$ {price}</Text>
                 </View>
@@ -27,38 +33,41 @@ const styles = StyleSheet.create({
                       elevation:4,
                       shadowOpacity:0.4,
                       shadowColor:"black",
-                      margin:15,
-                      width:'90%',
-                      height: '70%',
+                      margin:20,
+                      width:'80%',
+                      height: '50%',
                       padding:10,
                       justifyContent:"center",
                       alignItems:"center",
-                      marginLeft: 22
+                      marginLeft: 40,
+                      borderRadius: 10
+                      
                     },
 
                 view2: {flexDirection:"row",
                         padding:0,
                         justifyContent:"space-between",
-                        width: '90%',
+                        width: '80%',
                         height: '60%'
                     },
 
                 view3 : {justifyContent:"space-between",
-                          width:'50%'
+                          width:'40%'
                         },
 
                 text1: {
-                    fontSize:27,
+                    fontSize:18,
                     color:colors.grey1,
                     }, 
 
-                view4: {width:200,
-                          height:200,
-                          justifyContent: 'center'
+                view4: {width:100,
+                          height:100,
+                          justifyContent: 'center',
+                          marginRight: 5
                         },
 
-                image: {height:175,
-                        width:155,
+                image: {height:100,
+                        width:120,
                         marginRight: 1
                     }
 

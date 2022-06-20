@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react';
 
-import {SafeAreaView, View, Button, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList,} from 'react-native'
+import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList,} from 'react-native'
 import { Icon } from 'react-native-elements';
 import { AuthContext } from '../navigation/AuthContext';
 import {colors, parameter, title, } from "../global/style"
 import { db } from '../../NoT';
+import { Button } from '@react-native-material/core';
 
 export default function MyAccountScreen({navigation}) {
     const {user, logout} = useContext(AuthContext);
@@ -34,20 +35,20 @@ export default function MyAccountScreen({navigation}) {
                         <Text style = {{color: "white", fontSize :26, fontWeight : "bold"}}> My Account</Text>
                     </View>
                 </View>
-                
-                 <View style = {{marginTop: 10, marginLeft: 15 }}>
+                <View style = {{flex:4}}>
+                 <View style = {{marginTop: 10, marginLeft: 15,flex:4 }}>
                     <Text style = {{fontSize :18, fontWeight : "bold"}}>
                     Email :   {userData.email}
                     </Text>
                 </View>
 
-                <View  style = {{marginTop: 10, marginLeft: 15 }}>
+                <View  style = {{marginTop: 10, marginLeft: 15,flex:4 }}>
                     <Text style = {{fontSize :18, fontWeight : "bold"}}>
                     First Name :   {userData.firstName}
                     </Text>
                 </View>
 
-                <View  style = {{marginTop: 10, marginLeft: 15 }}>
+                <View  style = {{marginTop: 10, marginLeft: 15,flex:4 }}>
                     <Text style = {{fontSize :18, fontWeight : "bold"}}>
                     Last Name :   {userData.lastName}
                     </Text>
@@ -58,22 +59,23 @@ export default function MyAccountScreen({navigation}) {
                     Mobile Number :   {userData.mobileNumber}
                     </Text>
                  </View>
-                    
+                 </View>  
                    
                 <View style = {{flex:4,justifyContent: 'flex-end',marginBottom: 30}}>
-                <View style = {{marginHorizontal: 20, marginTop:30 }}>
+                {/* <View style = {{marginHorizontal: 20, marginTop:30 }}>
                     <Button
                             title = "Edit Profile"
                             buttonStyle = {parameter.styledButton}
                             titleStyle = {parameter.buttonTitle}
                             onPress = {() => {navigation.navigate("EditProfileScreen")}}
                             />
-                </View>
+                </View> */}
             
-                <View style = {{marginHorizontal: 20, marginTop:30 }}>
+                <View style = {{marginHorizontal: 30 }}>
                 <Button
                     title = "LOGOUT"
-                    buttonStyle = {parameter.styledButton}
+                    color = 'orange'
+                    style = {{height: 70, justifyContent: 'center'}}
                     titleStyle = {parameter.buttonTitle}
                     onPress = {
                         () => logout()

@@ -29,22 +29,23 @@ export default function RestaurantScreen({navigation,route}) {
                 <Text style ={styles.text1}>{restaurant?.name}</Text>
             </View>
 
-           
                 <FlatList 
                     style ={{backgroundColor:'white'}}
                     data = {restaurant?.menu}
                     keyExtractor = {(item,index)=>index.toString()}
                     showsVerticalScrollIndicator = {true}
-                    renderItem = {({item,index})=>(
+                    renderItem = {({item})=>(
                         <View>
                             <MenuCard 
                                 OnPressMenuCard={ () => {navigation.navigate("ProductScreen", {
                                     item,
+                                    restaurant
                                 })}}
                                 productName ={item.meal}
                                 image ={item.image}
                                 price ={item.price}
                                 productDetails = {item.details}
+                                stall  = {restaurant.name}
                             />
                         </View>
                     )}
