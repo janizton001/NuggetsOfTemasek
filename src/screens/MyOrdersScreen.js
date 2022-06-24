@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, Dimensions,TouchableOpacity,Animated,ScrollView, FlatList,} from 'react-native'
+import {SafeAreaView, View, Text, StyleSheet, Dimensions,TouchableOpacity,Animated,ScrollView, FlatList, Modal, Pressable} from 'react-native'
 import { colors, parameter, Icon } from 'react-native-elements';
 import OrderCard from '../components/OrderCard';
 import { db } from '../../NoT';
@@ -14,7 +14,19 @@ export default function MyOrdersScreen() {
 
     const [orders, setOrders] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
-    const {user} = useContext(AuthContext)
+    const {user} = useContext(AuthContext);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalStatus, setModalStatus] =  useState('');
+    const [modalDetail, setModalDetails] =  useState({
+                                                productName:' ', 
+                                                price: 0,
+                                                restaurant: ' ', 
+                                                remarks: ' ', 
+                                                amount: 0, 
+                                                deliveryFee: 0, 
+                                                quantity: 0
+                                            });
+    
 
     const ItemBox = (props) => {
         const leftSwipe = (progress, dragX) => {
@@ -47,7 +59,7 @@ export default function MyOrdersScreen() {
         };
         return(
             <Swipeable renderLeftActions={leftSwipe}>
-                <View style = {{marginTop: 10}}>
+                <View style = {{marginTop: 5}}>
                     <OrderCard 
                         productName ={props.productName}
                         image ={props.image}
@@ -55,6 +67,23 @@ export default function MyOrdersScreen() {
                         quantity = {props.quantity}
                         status = {props.status}
                         mobileNo = {props.mobileNo}
+                        remarks = {props.remarks}
+                        restaurant = {props.restaurant}
+                        deliveryFee = {props.deliveryFee}
+                        onPressOrderCard = {() => {
+                            setModalDetails({
+                                productName: props.productName, 
+                                amount: (props.price * props.quantity) + props.deliveryFee, 
+                                price: props.price,
+                                deliveryFee: props.deliveryFee,
+                                restaurant: props.restaurant, 
+                                remarks: props.remarks,
+                                quantity: props.quantity
+                    
+                            });
+                            setModalStatus(props.status > 12 ? props.status : "Accepted ")
+                            setModalVisible(!modalVisible);
+                        }}
                     />
                 </View>
             </Swipeable>
@@ -82,7 +111,10 @@ export default function MyOrdersScreen() {
                         quantity,
                         image,
                         status,
-                        mobileNo
+                        mobileNo,
+                        remarks,
+                        restaurant,
+                        deliveryFee
                     } = doc.data();
                     const documentId = doc.id
                     list.push({
@@ -92,7 +124,10 @@ export default function MyOrdersScreen() {
                         image,
                         documentId,
                         status,
-                        mobileNo
+                        mobileNo,
+                        remarks,
+                        restaurant,
+                        deliveryFee
                     })
                   
                 })
@@ -134,7 +169,7 @@ export default function MyOrdersScreen() {
             </View>   
             
             <FlatList 
-                    style ={{backgroundColor:'white'}}
+                    style ={{backgroundColor:'#F7EDDC', paddingTop: 5}}
                     data = {orders}
                     keyExtractor = {(item,index)=>index.toString()}
                     showsVerticalScrollIndicator = {true}
@@ -149,12 +184,48 @@ export default function MyOrdersScreen() {
                             id = {item.documentId}
                             status = {item.status}
                             mobileNo = {item.mobileNo}
+                            remarks = {item.remarks}
+                            restaurant = {item.restaurant}
+                            deliveryFee = {item.deliveryFee}
                         />
                     )}
 
                 
                 />
-
+                 <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={{fontSize: 26,fontWeight: 'bold'}}>Order Details </Text>
+                            <Text style={styles.modalText}> Order : {modalDetail.productName} from {modalDetail.restaurant}</Text> 
+                            <Text style={styles.modalText}>Delivery Location : {modalDetail.remarks}</Text>
+                            <View>
+                            <Text style={{fontSize: 16, textAlign: 'center'}}>Total Amount Paid : $ {(modalDetail.amount).toFixed(2)}</Text>
+                            <Text style={{color: 'grey', textAlign: 'center'}}>
+                                Food price : {modalDetail.quantity} x ${modalDetail.price.toFixed(2)} 
+                                = $ {(modalDetail.quantity * modalDetail.price).toFixed(2)}
+                            </Text>
+                            <Text style={{color: 'grey', textAlign: 'center'}}>
+                                Delivery Fee : ${modalDetail.deliveryFee.toFixed(2)}
+                            </Text>
+                            </View>
+                            <Text style={styles.modalText}>Status : {modalStatus}</Text>
+                            <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Text style={{color: 'white'}}>Close</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
         </View>
     )
 }
@@ -193,6 +264,44 @@ const styles = StyleSheet.create({
             width: 60,
             height: '80%',
             marginTop: 15
+          },
+          modalView: {
+            margin: 30,
+            height: '50%',
+            width: '70%',
+            backgroundColor: "white",
+            borderRadius: 20,
+            padding: 35,
+            alignItems: "center",
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 2
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 4,
+            elevation: 5,
+            justifyContent: 'space-between'
+          },
+          modalText: {
+            marginBottom: 15,
+            textAlign: 'center',
+            fontSize: 16
+          },
+          centeredView: {
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 22
+          },
+          button: {
+            borderRadius: 10,
+            padding: 15,
+            elevation: 2,
+            
+          },
+          buttonClose: {
+            backgroundColor: "orange",
           },
     
     })

@@ -87,7 +87,11 @@ const DeliveryStack = ({navigation}) => (
 export default function AppStack(){
 
     return(
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={{
+            tabBarStyle: {borderTopRightRadius: 5, borderTopLeftRadius: 5},
+            tabBarActiveTintColor: 'orange',
+            }}
+            >
             <Tab.Screen 
                 name ="Home"
                 component ={HomeStack}
@@ -118,7 +122,8 @@ export default function AppStack(){
                                 color ={color}
                                 size ={size}
                             />
-                        )
+                        ),
+                        unmountOnBlur: true
                     }
                 }
             />
@@ -131,12 +136,13 @@ export default function AppStack(){
                         tabBarLabel : "Deliveries",
                         tabBarIcon: ({color,size})=>(
                             <Icon 
-                                name ='view-list'
+                                name ='delivery-dining'
                                 type = 'material'
-                                color ={color}
-                                size ={size}
+                                color = {color}
+                                size ={size} 
                             />
-                        )
+                        ),
+                        unmountOnBlur: true
                     }
                 }
             />

@@ -2,26 +2,23 @@ import React from 'react';
 import {Text,View,Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {colors} from '../global/style'
 
-
-
-export default function MenuCard({productName,price,image,productDetails,stall, OnPressMenuCard}){
+export default function UserProfileCard({attribute, attributeData}){
+    
     return(
-        <TouchableOpacity onPress={OnPressMenuCard}>
+        
         <View style ={styles.view1}>
             <View style ={styles.view2}>
                 <View style ={styles.view3}>
-                    <Text style ={styles.text1}>{productName}</Text>
+                    <Text style ={styles.text1}>{attribute}</Text>
                     <View>
-                        <Text style ={styles.text2}>{productDetails} </Text>
+                        <Text style ={styles.text2}> : {attributeData}</Text>
                     </View>
-                    <Text style = {styles.text3}>S$ {price == null ? price : price.toFixed(2)}</Text>
+                
                 </View>
-                <View style ={{flex:3}}>
-                     <Image style ={styles.image} source ={{uri:image}} />
-                </View>
+               
             </View>
         </View>
-        </TouchableOpacity>
+       
     )
 }
 
@@ -32,8 +29,7 @@ const styles =StyleSheet.create({
     view1:{backgroundColor:"white",
             elevation:4,
             shadowOpacity:0.4,
-            shadowColor:"grey",
-            borderRadius: 5,
+            shadowColor:"black",
             margin:5,
             padding:10
 },

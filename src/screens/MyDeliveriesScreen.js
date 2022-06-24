@@ -23,9 +23,23 @@ export default function MyDeliveriesScreen() {
                     <Text style = {{color: "white", fontSize :26, fontWeight : "bold"}}> My Deliveries</Text>
                 </View>
             </View>   
-            <Tab.Navigator>
-                <Tab.Screen name="All Deliveries" component={AllDeliveries} />
-                <Tab.Screen name="Accepted Deliveries" component={AcceptedDeliveries} />
+            <Tab.Navigator  screenOptions={{
+                tabBarStyle: {backgroundColor: '#FF8C00', borderBottomRightRadius: 5, borderBottomLeftRadius: 5},
+                tabBarActiveTintColor: 'white',
+                mountOnBlur: true
+                }}>
+                <Tab.Screen 
+                    name="All Deliveries" 
+                    component={AllDeliveries}
+                    options = {{
+                        
+                    }} />
+                <Tab.Screen 
+                    name="Accepted Deliveries" 
+                    component={AcceptedDeliveries}
+                    options = {{
+                        
+                    }} />
             </Tab.Navigator>
         
 

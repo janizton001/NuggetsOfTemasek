@@ -2,20 +2,24 @@ import React from 'react';
 import {Text,View,Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {colors} from '../global/style'
 
-export default function OrderCard({productName,price,image, quantity, status,onPressOrderCard}){
+export default function OrderCard({productName,price,image, quantity, status, mobileNo, remarks, restaurant, deliveryFee, onPressOrderCard}){
 
+    if (status.length > 12) {
+        status = 'Accepted'
+    }
     
     return(
         <TouchableOpacity onPress={onPressOrderCard}>
         <View style ={styles.view1}>
             <View style ={styles.view2}>
                 <View style ={styles.view3}>
-                    <Text style ={styles.text1}>{productName}</Text>
+                    <Text style ={styles.text1}>{productName} from {restaurant}</Text>
                     <View>
                         <Text style ={styles.text2}> Qty:{quantity}</Text>
                     </View>
-                    <Text style = {styles.text3}>Total Price: S$ {price * quantity}</Text>
+                    <Text style = {styles.text3}>Total Amount: S$ {price == null ? price * quantity + deliveryFee : (price * quantity + deliveryFee).toFixed(2)}</Text>
                     <Text style = {styles.text3}>Status: {status} </Text>
+                    
                 </View>
                 <View style ={{flex:3}}>
                      <Image style ={styles.image} source ={{uri:image}} />
@@ -33,9 +37,13 @@ const styles =StyleSheet.create({
     view1:{backgroundColor:"white",
             elevation:4,
             shadowOpacity:0.4,
-            shadowColor:"black",
+            shadowColor:"grey",
             margin:5,
-            padding:10
+            padding:10,
+            borderRadius: 10,
+            borderColor: 'white',
+            borderWidth: 2
+           
 },
 
 view2: {flex:1,

@@ -22,7 +22,7 @@ export default function RestaurantScreen({navigation,route}) {
                 <Icon 
                     name ="arrow-left"
                     type = "material-community"
-                    color = {colors.black}
+                    color = 'white'
                     size = {25}
                     onPress ={()=>navigation.goBack()}
                 />
@@ -30,7 +30,7 @@ export default function RestaurantScreen({navigation,route}) {
             </View>
 
                 <FlatList 
-                    style ={{backgroundColor:'white'}}
+                    style ={{backgroundColor:'#F7EDDC', paddingTop: 7}}
                     data = {restaurant?.menu}
                     keyExtractor = {(item,index)=>index.toString()}
                     showsVerticalScrollIndicator = {true}
@@ -68,20 +68,20 @@ const styles = StyleSheet.create({
                  right:0
          },
     
-    view1:{flexDirection:"row",
-    alignItems:"center",
-    padding:10,
-    backgroundColor:colors.buttons,
-    top:0,
-    left:0,
-    right:0,
-    paddingTop:25
+    view1:{
+        flexDirection:"row",
+        alignItems:"center",
+        padding:10,
+        backgroundColor:'orange',
+        paddingTop:25,
+        paddingBottom: 20
     },
     
-    text1:{fontWeight:"bold",
+    text1:{
+        fontWeight:"bold",
           marginLeft:40,
-          color:colors.black,
-          fontSize:18
+          color: 'white',
+          fontSize:20
         },
     
     view2:{marginTop:5,

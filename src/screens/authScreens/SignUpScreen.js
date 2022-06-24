@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TextInput, Alert } from 'react-native'
 import React, { useState, useContext } from 'react'
 import {colors, parameter, title, } from "../../global/style"
 import Header from '../../components/Header';
@@ -15,6 +15,14 @@ const SignUpScreen = ({navigation}) => {
   const [mobileNumber, setMN] = useState('')
 
   const {register} = useContext(AuthContext)
+
+  const conditionsArray = [
+    email == '',
+    password == '',
+    firstName == '',
+    lastName == '',
+    mobileNumber == ''
+  ]
   
   return (
     <View style = {styles.container}>
@@ -64,10 +72,10 @@ const SignUpScreen = ({navigation}) => {
                     onChangeText={text => setEmail(text)}
                     />
                 </View>
-                <View style = {styles.textInput2}>
+                <View >
                     
                 <TextInput
-                    style = {{width: "80%"}}
+                    style = {styles.textInput1}
                     placeholder = "Password"
                     value={password}
                     onChangeText={text => setPassword(text)}
@@ -81,7 +89,19 @@ const SignUpScreen = ({navigation}) => {
                         title = "Sign me UP!"
                         buttonStyle = {parameter.styledButton}
                         titleStyle = {parameter.buttonTitle}
-                        onPress = {() => (register(email,password,firstName,lastName,mobileNumber))}
+                        onPress = {() => 
+                            {if(!conditionsArray.includes(true)) {
+                            register(email,password,firstName,lastName,mobileNumber).then(() =>{
+                                console.log("Account created using " + email)
+                                }
+                            )
+                            
+                            } else { 
+                               Alert.alert("A field is not filled") 
+                            }
+                        }
+                    }
+                            
                         />
             </View>
             <View style ={styles.view20}>
@@ -116,6 +136,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         marginBottom: 20,
         paddingLeft: 15,
+        height: 30
     },
 
     textInput2: {

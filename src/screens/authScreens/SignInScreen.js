@@ -17,7 +17,7 @@ export default function SignInScreen({navigation}) {
             <Header title = "My Account" type = "arrow-left" navigation = {navigation} />
 
             <View style = {{marginLeft:20, marginTop:10}}>
-                <Text style = {title}> Sign-in </Text>
+                <Text style = {title}> SIGN-IN </Text>
             </View>
 
             <View style = {{alignItems: "center", marginTop: 10}}>
@@ -33,10 +33,10 @@ export default function SignInScreen({navigation}) {
                     onChangeText={text => setEmail(text)}
                     />
                 </View>
-                <View style = {styles.textInput2}>
+            <View>
                     
                 <TextInput
-                    style = {{width: "80%"}}
+                    style = {styles.textInput1}
                     placeholder = "Password"
                     value={password}
                     onChangeText={text => setPassword(text)}
@@ -89,12 +89,13 @@ const styles = StyleSheet.create({
     },
 
     textInput1: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "#86939e",
         marginHorizontal: 20,
         borderRadius: 12,
         marginBottom: 20,
         paddingLeft: 15,
+        height: 30
     },
 
     textInput2: {

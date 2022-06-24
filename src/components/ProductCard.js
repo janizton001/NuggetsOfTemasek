@@ -15,7 +15,7 @@ const ProductCard = ({productName,price,image,restaurant,uid}) => {
                     fontWeight: "bold"
                     }}>{restaurant}  </Text>
                     <Text style ={styles.text1}>{productName}</Text>
-                    <Text style ={styles.text1}>S$ {price}</Text>
+                    <Text style ={styles.text1}>S$ {price == null ? price : price.toFixed(2)}</Text>
                 </View>
                 <View style ={styles.view4}>
                     <Image style ={styles.image}  source ={{uri :image}}/>
@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
                       elevation:4,
                       shadowOpacity:0.4,
                       shadowColor:"black",
-                      margin:20,
-                      width:'80%',
-                      height: '50%',
+                      margin:10,
+                      width:'90%',
+                      height: 250,
                       padding:10,
                       justifyContent:"center",
                       alignItems:"center",
-                      marginLeft: 40,
+                      marginLeft: 20,
                       borderRadius: 10
                       
                     },
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
                         padding:0,
                         justifyContent:"space-between",
                         width: '80%',
-                        height: '60%'
+                        height: '70%'
                     },
 
                 view3 : {justifyContent:"space-between",

@@ -23,13 +23,13 @@ export default function FoodCard({
                 />
             </View>
 
-            <View style = {{borderColor: colors.grey1}}>
+            <View style = {{paddingTop: 5}}>
 
                 <View>
                 <Text style = {{fontSize: 18, fontWeight: "bold",marginLeft: 10, fontFamily: 'Arial'}}> {name}</Text>
                 </View>
 
-                <View style = {{flex:1, flexDirection: 'row'}}>
+                <View style = {{flex:1, flexDirection: 'row', alignItems: 'center'}}>
 
                     <View style = {styles.descriptionBox}>
                         <Icon
@@ -42,7 +42,7 @@ export default function FoodCard({
                         <Text style = {styles.description}> {distAway} km </Text>
                     </View>
 
-                    <View style = {{flex: 9, flexDirection: 'row'}}>
+                    <View style = {{flex: 9, flexDirection: 'row',alignItems: 'center',}}>
                         <Text style = {styles.description}> {address} </Text>
                     </View>
 
@@ -58,9 +58,9 @@ export default function FoodCard({
 const styles = StyleSheet.create({
     cardView: {
         marginHorizontal: 5,
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 5,
-        borderColor: 'black',
+        borderColor: 'grey',
         marginTop: 10
     },
 
@@ -73,15 +73,18 @@ const styles = StyleSheet.create({
     descriptionBox : {
         flex: 4,
         flexDirection: 'row',
-        borderRightColor: 'black',
         paddingHorizontal: 5,
+        paddingTop: 3,
         marginLeft: 5,
         borderRightWidth: 1,
+        borderRightColor: colors.grey3,
+        paddingBottom: 5,
+        alignItems: 'center'
     },
 
     description: {
         fontSize: 14, 
-        fontWeight: "bold", 
+        
         color: colors.grey3,
         marginLeft: 5
     }

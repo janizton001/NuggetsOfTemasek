@@ -13,6 +13,7 @@ export default function AcceptedDeliveries() {
     const {user} = useContext(AuthContext)
     const [modalVisible, setModalVisible] = useState(false);
     const [modalNumber, setModalNumber] =  useState('');
+    const [modalDetail, setModalDetails] =  useState({productName:' ', amount: 0, restaurant: ' ', remarks: ' ', deliveryFee: 0, quantity: 0, price: 0});
 
 
     const onRefresh = () => {
@@ -27,7 +28,7 @@ export default function AcceptedDeliveries() {
             await db
             .collection('orders')
             .where("uid", "!=", user.uid)
-            .where("status", "==", "Accepted")
+            .where("status", "==", "Accepted by " + user.uid)
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) =>{
@@ -37,7 +38,10 @@ export default function AcceptedDeliveries() {
                         quantity,
                         image,
                         status,
-                        mobileNo
+                        mobileNo,
+                        remarks,
+                        restaurant,
+                        deliveryFee
                         
                     } = doc.data();
                     const documentId = doc.id
@@ -48,9 +52,11 @@ export default function AcceptedDeliveries() {
                         image,
                         documentId,
                         status,
-                        mobileNo
-                    })
-                  
+                        mobileNo,
+                        remarks,
+                        restaurant,
+                        deliveryFee
+                    })                 
                   
                 })
             })
@@ -72,7 +78,6 @@ export default function AcceptedDeliveries() {
     const cancelOrder = (id) => {
         console.log('Current Order Id: ', id);
         
-
         db
           .collection('orders')
           .doc(id)
@@ -140,9 +145,20 @@ export default function AcceptedDeliveries() {
                         price ={props.price}
                         quantity = {props.quantity}
                         status = {props.status}
+                        restaurant = {props.restaurant}
+                        deliveryFee = {props.deliveryFee}
                         onPressOrderCard = {() => {
                             setModalNumber(props.mobileNo);
                             setModalVisible(!modalVisible);
+                            setModalDetails({
+                              productName: props.productName, 
+                              amount: props.price * props.quantity, 
+                              restaurant: props.restaurant, 
+                              remarks: props.remarks,
+                              price: props.price,
+                              quantity: props.quantity,
+                              deliveryFee: props.deliveryFee
+                          });
                         }}
                     />
                 </View>
@@ -157,7 +173,7 @@ export default function AcceptedDeliveries() {
         
         <View style ={styles.container}>  
             <FlatList 
-                    style ={{backgroundColor:'white'}}
+                    style ={{backgroundColor:'#F7EDDC', paddingTop: 5}}
                     data = {orders}
                     keyExtractor = {(item,index)=>index.toString()}
                     showsVerticalScrollIndicator = {true}
@@ -172,11 +188,12 @@ export default function AcceptedDeliveries() {
                             id = {item.documentId}
                             status = {item.status}
                             mobileNo = {item.mobileNo}
+                            remarks = {item.remarks}
+                            restaurant = {item.restaurant}
+                            deliveryFee = {item.deliveryFee}
                         />
     
-                    )}
-
-                
+                    )}                
             />
             <Modal
                 animationType="slide"
@@ -190,13 +207,17 @@ export default function AcceptedDeliveries() {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={{fontSize: 26,fontWeight: 'bold'}}>Delivery details </Text>
-                <Text style={styles.modalText}>Mobile Number : {modalNumber}</Text>
-                <Text style={styles.modalText}>Please text/call the above number to arrange meeting details</Text>
+                <Text style={styles.modalText}>Order : {modalDetail.productName} from {modalDetail.restaurant}</Text>
+                <Text style={styles.modalText}>Location : {modalDetail.remarks}</Text>
+                <Text style={styles.modalText}>Total Amount to Pay : ${modalDetail.amount.toFixed(2)}</Text>
+                        <Text style={styles.modalText}>Delivery Fee Received: ${modalDetail.deliveryFee.toFixed(2)}</Text>  
+                <Text style={styles.modalText, {fontWeight: 'bold'}}>Mobile Number : {modalNumber}</Text>
+                <Text style={styles.modalText}>Please text/call the above number to arrange meeting details and settle payment</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
+                  <Text style={{color: 'white'}}>Close</Text>
                 </Pressable>
               </View>
             </View>
@@ -248,8 +269,8 @@ const styles = StyleSheet.create({
           },
           modalView: {
             margin: 30,
-            height: '50%',
-            width: '70%',
+            height: '60%',
+            width: '80%',
             backgroundColor: "white",
             borderRadius: 20,
             padding: 35,
@@ -266,10 +287,11 @@ const styles = StyleSheet.create({
           },
           modalText: {
             marginBottom: 15,
-            textAlign: "center"
+            textAlign: "center",
+            fontSize: 16
           },
           button: {
-            borderRadius: 20,
+            borderRadius: 10,
             padding: 15,
             elevation: 2,
             
