@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput} from 'react-native'
+import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput, Alert} from 'react-native'
 import Header from '../../components/Header';
 import {colors, parameter, title, } from "../../global/style"
 import { Icon, Button } from 'react-native-elements'
@@ -10,7 +10,10 @@ export default function SignInScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-   const {login} = useContext(AuthContext)
+    const {login, forgetPassword} = useContext(AuthContext)
+    const conditionsArray = [
+     email == '',
+   ]
    
     return (
         <View style = {styles.container}> 
@@ -58,7 +61,18 @@ export default function SignInScreen({navigation}) {
             </View>
 
             <View style = {{alignItems: "center"}}>
-                <Text style = {{...styles.text}}> Forgot Password? </Text>
+                <Text 
+                style = {{...styles.text}} 
+                onPress = {() => 
+                    {if(!conditionsArray.includes(true)) {
+                    forgetPassword(email)
+                    
+                } else { 
+                    Alert.alert("Please enter email to change password.") 
+                 }
+            }}> 
+                Forgot Password? 
+                </Text>
             </View> 
 
             <View style = {{alignItems: "center", marginTop: 20}}>

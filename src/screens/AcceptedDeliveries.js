@@ -2,7 +2,7 @@ import React, {useState,useContext,useEffect} from 'react';
 import {Modal,Pressable, View, Text, StyleSheet, Dimensions,TouchableOpacity,Animated,ScrollView, FlatList,} from 'react-native'
 import OrderCard from '../components/OrderCard';
 import { db } from '../../NoT';
-import { Swipeable } from 'react-native-gesture-handler';
+import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AuthContext } from '../navigation/AuthContext';
 
 
@@ -137,6 +137,7 @@ export default function AcceptedDeliveries() {
         };
         return(
             <View>
+            <GestureHandlerRootView>
             <Swipeable renderLeftActions={leftSwipe}>
                 <View style = {{marginTop: 10}}>
                     <OrderCard 
@@ -163,6 +164,7 @@ export default function AcceptedDeliveries() {
                     />
                 </View>
             </Swipeable>
+            </GestureHandlerRootView>
             
             </View>
 
@@ -211,7 +213,7 @@ export default function AcceptedDeliveries() {
                 <Text style={styles.modalText}>Location : {modalDetail.remarks}</Text>
                 <Text style={styles.modalText}>Total Amount to Pay : ${modalDetail.amount.toFixed(2)}</Text>
                         <Text style={styles.modalText}>Delivery Fee Received: ${modalDetail.deliveryFee.toFixed(2)}</Text>  
-                <Text style={styles.modalText, {fontWeight: 'bold'}}>Mobile Number : {modalNumber}</Text>
+                <Text style={styles.modalText}>Mobile Number : {modalNumber}</Text>
                 <Text style={styles.modalText}>Please text/call the above number to arrange meeting details and settle payment</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}

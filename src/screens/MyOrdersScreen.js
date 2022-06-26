@@ -4,7 +4,7 @@ import { colors, parameter, Icon } from 'react-native-elements';
 import OrderCard from '../components/OrderCard';
 import { db } from '../../NoT';
 import { ActivityIndicator, RefreshControl } from 'react-native-web';
-import { Swipeable } from 'react-native-gesture-handler';
+import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 import {query, collection, getDocs ,documentId } from "firebase/firestore";
 import { AuthContext } from '../navigation/AuthContext';
 
@@ -58,6 +58,7 @@ export default function MyOrdersScreen() {
           );
         };
         return(
+            <GestureHandlerRootView>
             <Swipeable renderLeftActions={leftSwipe}>
                 <View style = {{marginTop: 5}}>
                     <OrderCard 
@@ -87,6 +88,7 @@ export default function MyOrdersScreen() {
                     />
                 </View>
             </Swipeable>
+            </GestureHandlerRootView>
         )
     }
 
