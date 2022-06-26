@@ -2,7 +2,7 @@ import React, {useState,useContext,useEffect} from 'react';
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TouchableOpacity,Animated,ScrollView, FlatList, Modal, Pressable} from 'react-native'
 import OrderCard from '../components/OrderCard';
 import { db } from '../../NoT';
-import { Swipeable } from 'react-native-gesture-handler';
+import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 import {query, collection, getDocs ,documentId } from "firebase/firestore";
 import { AuthContext } from '../navigation/AuthContext';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -46,6 +46,7 @@ export default function AllDeliveries() {
           );
         };
         return(
+          <GestureHandlerRootView>
             <Swipeable renderLeftActions={leftSwipe}>
                 <View style = {{marginTop: 5}}>
                     <OrderCard 
@@ -72,6 +73,7 @@ export default function AllDeliveries() {
                     />
                 </View>
             </Swipeable>
+            </GestureHandlerRootView>
         )
     }
 
