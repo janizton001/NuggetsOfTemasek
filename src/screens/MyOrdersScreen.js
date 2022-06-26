@@ -31,7 +31,7 @@ export default function MyOrdersScreen() {
     const ItemBox = (props) => {
         const leftSwipe = (progress, dragX) => {
           const scale = dragX.interpolate({
-            inputRange: [0, 100],
+            inputRange: [0, 50],
             outputRange: [0, 1],
             extrapolate: 'clamp',
           });
@@ -47,13 +47,13 @@ export default function MyOrdersScreen() {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={0.6}>
+            {/* <TouchableOpacity activeOpacity={0.6}>
                 <View style={styles.editBox}>
                     <Animated.Text style={{transform: [{scale: scale}]}}>
                         Edit
                     </Animated.Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             </View>
           );
         };
@@ -81,7 +81,7 @@ export default function MyOrdersScreen() {
                                 quantity: props.quantity
                     
                             });
-                            setModalStatus(props.status > 12 ? props.status : "Accepted ")
+                            setModalStatus(props.status > 12 ? "Accepted ": "Not Accepted")
                             setModalVisible(!modalVisible);
                         }}
                     />
