@@ -137,7 +137,7 @@ export default function AcceptedDeliveries() {
         };
         return(
             <View>
-            <GestureHandlerRootView>
+              <GestureHandlerRootView>
             <Swipeable renderLeftActions={leftSwipe}>
                 <View style = {{marginTop: 10}}>
                     <OrderCard 
@@ -165,7 +165,6 @@ export default function AcceptedDeliveries() {
                 </View>
             </Swipeable>
             </GestureHandlerRootView>
-            
             </View>
 
         )

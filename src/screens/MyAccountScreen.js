@@ -100,7 +100,7 @@ export default function MyAccountScreen({navigation}) {
                 <Button
                     title = "LOGOUT"
                     color = 'orange'
-                    style = {{height: 70, justifyContent: 'center'}}
+                    style = {{height: 50, justifyContent: 'center'}}
                     titleStyle = {parameter.buttonTitle}
                     onPress = {
                         () => logout()
