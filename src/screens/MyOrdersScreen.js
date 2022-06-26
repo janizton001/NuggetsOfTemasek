@@ -7,7 +7,11 @@ import { colors, parameter, Icon } from 'react-native-elements';
 import OrderCard from '../components/OrderCard';
 import { db } from '../../NoT';
 import { ActivityIndicator, RefreshControl } from 'react-native-web';
+<<<<<<< Updated upstream
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
+=======
+import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
+>>>>>>> Stashed changes
 import {query, collection, getDocs ,documentId } from "firebase/firestore";
 >>>>>>> Stashed changes
 
@@ -52,6 +56,7 @@ export default function MyOrdersScreen() {
         };
         return(
             <GestureHandlerRootView>
+<<<<<<< Updated upstream
                 <Swipeable renderLeftActions={leftSwipe}>
                     <View style = {{marginTop: 10}}>
                         <OrderCard 
@@ -62,6 +67,37 @@ export default function MyOrdersScreen() {
                         />
                     </View>
                 </Swipeable>
+=======
+            <Swipeable renderLeftActions={leftSwipe}>
+                <View style = {{marginTop: 5}}>
+                    <OrderCard 
+                        productName ={props.productName}
+                        image ={props.image}
+                        price ={props.price}
+                        quantity = {props.quantity}
+                        status = {props.status}
+                        mobileNo = {props.mobileNo}
+                        remarks = {props.remarks}
+                        restaurant = {props.restaurant}
+                        deliveryFee = {props.deliveryFee}
+                        onPressOrderCard = {() => {
+                            setModalDetails({
+                                productName: props.productName, 
+                                amount: (props.price * props.quantity) + props.deliveryFee, 
+                                price: props.price,
+                                deliveryFee: props.deliveryFee,
+                                restaurant: props.restaurant, 
+                                remarks: props.remarks,
+                                quantity: props.quantity
+                    
+                            });
+                            setModalStatus(props.status > 12 ? props.status : "Accepted ")
+                            setModalVisible(!modalVisible);
+                        }}
+                    />
+                </View>
+            </Swipeable>
+>>>>>>> Stashed changes
             </GestureHandlerRootView>
         )
     }

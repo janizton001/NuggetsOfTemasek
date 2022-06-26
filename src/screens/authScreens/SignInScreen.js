@@ -1,9 +1,19 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from 'react';
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput} from 'react-native'
+=======
+import React, { useState, useEffect, useContext } from 'react';
+import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput, Alert} from 'react-native'
+>>>>>>> Stashed changes
 import Header from '../../components/Header';
 import {colors, parameter, title, } from "../../global/style"
 import { Icon, Button } from 'react-native-elements'
 import { auth } from '../../../NoT';
+<<<<<<< Updated upstream
+=======
+import { AuthContext } from '../../navigation/AuthContext';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+>>>>>>> Stashed changes
 
 export default function SignInScreen({navigation}) {
     const [email, setEmail] = useState('')
@@ -20,6 +30,7 @@ export default function SignInScreen({navigation}) {
         return unsubscribe
       }, [])
 
+<<<<<<< Updated upstream
     const handleLogin = () => {
         auth
           .signInWithEmailAndPassword(email, password)
@@ -34,6 +45,12 @@ export default function SignInScreen({navigation}) {
 =======
    const {login, forgetPassword} = useContext(AuthContext)
    
+=======
+   const {login, forgetPassword} = useContext(AuthContext)
+   const conditionsArray = [
+    email == '',
+  ]
+>>>>>>> Stashed changes
    
 >>>>>>> Stashed changes
     return (
@@ -64,7 +81,7 @@ export default function SignInScreen({navigation}) {
                     placeholder = "Password"
                     value={password}
                     onChangeText={text => setPassword(text)}
-                    secureTextEntry
+                    secureTextEntry 
                     />
                 </View> 
             </View>
@@ -81,6 +98,7 @@ export default function SignInScreen({navigation}) {
                 />
             </View>
 
+<<<<<<< Updated upstream
             <View style = {{marginHorizontal: 20, marginVertical: 20}}>
                 <Button
                 title = "Forgot Password"
@@ -92,6 +110,26 @@ export default function SignInScreen({navigation}) {
                 }
                 />
                 <Text style = {{...styles.text}}> Forgot Password? </Text>
+=======
+            <View style = {{alignItems: "center"}}>
+                <Text 
+                style = {{...styles.text}} 
+                onPress = {() =>
+                    { if(!conditionsArray.includes(true)) {
+                        forgetPassword(email)
+                    } else {
+                        Alert.alert("Please enter your email to change your password.")
+                    }
+                    
+                } 
+                
+
+                    
+                    
+                }> 
+                Forgot Password? 
+                </Text>
+>>>>>>> Stashed changes
             </View> 
 
             <View style = {{alignItems: "center", marginTop: 20}}>
