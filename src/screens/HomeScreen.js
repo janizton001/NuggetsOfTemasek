@@ -8,18 +8,20 @@ import { restaurantData } from '../global/Data';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
 
     return (
         <View style = {styles.container}>
             <HomeHeader />
-            <View>
+            <View style = {{backgroundColor: '#F7EDDC', paddingBottom: 15, borderRadius: 5}}>
             
             <View style ={{marginTop: 15, marginLeft: 10}}>
-                <Text style = {{fontSize: 20, fontWeight: "bold"}}> Food Near You </Text>
+                <Text style = {{fontSize: 20, fontWeight: "bold", color: colors.grey2}}> Food Options Around NUS </Text>
             </View>
             <View style ={styles.locationAndSortRow} >
+                <TouchableOpacity>
                 <View style ={styles.locationButton}>
+                    
                     <Icon
                     type = "material-community"
                     name = "map-marker"
@@ -28,31 +30,37 @@ export default function HomeScreen() {
                     />
                     <Text > Current Location </Text>
                 </View>
-                <View style = {{marginRight: 20}}> 
+                </TouchableOpacity>
+                
+                {/* <View style = {{marginRight: 20}}> 
                 <Icon
                     type = "material-community"
                     name = "tune"
                     color = {colors.grey1}
                     size = {25}
                     />
-                </View>
+                </View> */}
             </View>
             </View>
             
                 <FlatList
-                    style = {{marginTop: 15, marginBottom: 2}}
+                    style = {{ paddingBottom: 4, backgroundColor:'#F7EDDC'}}
                     showsVerticalScrollIndicator = {true}
                     data = {restaurantData}
                     keyExtractor = {(item,index) => index.toString()}
                     renderItem = {({item}) => (
                         <View> 
                             <FoodCard 
+                                OnPressFoodCard={ () => {navigation.navigate("RestaurantScreen", {
+                                    item,
+                                })}}
                                 screenWidth={SCREEN_WIDTH * 0.90}
                                 image = {item.image}
                                 name = {item.name}
                                 distAway = {item.distAway}
                                 address = {item.address}
                                 collectTime = {item.collectTime}
+                                menu = {item.menu}
                             />
                         </View>
                     )}
@@ -71,7 +79,8 @@ const styles = StyleSheet.create({
          alignItems: 'center',
          marginTop: 10, 
          justifyContent: "space-between",
-         marginHorizontal: 10
+         marginHorizontal: 10,
+         
     },
     locationButton :{
         flexDirection: "row", 
