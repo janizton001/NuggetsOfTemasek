@@ -9,6 +9,7 @@ import EditProfileScreen from '../screens/EditProfileScreen';
 import RestaurantScreen from '../screens/RestaurantScreen';
 import ProductScreen from '../screens/ProductScreen';
 import MyDeliveriesScreen from '../screens/MyDeliveriesScreen';
+import CanteenScreen from '../screens/CanteenScreen';
 
 const App = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,6 +19,14 @@ const HomeStack = ({navigation}) => (
         <App.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options ={{
+            headerShown: false,
+          }} 
+        />
+
+        <App.Screen
+        name="CanteenScreen"
+        component={CanteenScreen}
         options ={{
             headerShown: false,
           }} 

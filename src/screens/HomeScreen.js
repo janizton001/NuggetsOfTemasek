@@ -32,14 +32,14 @@ export default function HomeScreen({navigation}) {
                 </View>
                 </TouchableOpacity>
                 
-                {/* <View style = {{marginRight: 20}}> 
+                <View style = {{marginRight: 20}}> 
                 <Icon
                     type = "material-community"
                     name = "tune"
                     color = {colors.grey1}
                     size = {25}
                     />
-                </View> */}
+                </View>
             </View>
             </View>
             
@@ -51,7 +51,7 @@ export default function HomeScreen({navigation}) {
                     renderItem = {({item}) => (
                         <View> 
                             <FoodCard 
-                                OnPressFoodCard={ () => {navigation.navigate("RestaurantScreen", {
+                                OnPressFoodCard={ () => {navigation.navigate("CanteenScreen", {
                                     item,
                                 })}}
                                 screenWidth={SCREEN_WIDTH * 0.90}
@@ -61,6 +61,7 @@ export default function HomeScreen({navigation}) {
                                 address = {item.address}
                                 collectTime = {item.collectTime}
                                 menu = {item.menu}
+                                stalls = {item.stalls}
                             />
                         </View>
                     )}

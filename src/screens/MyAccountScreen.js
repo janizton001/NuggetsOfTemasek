@@ -86,17 +86,18 @@ export default function MyAccountScreen({navigation}) {
                  </ScrollView>  
                  </View>
                    
-                <View style = {{justifyContent: 'flex-end',marginBottom: 30}}>
-                {/* <View style = {{marginHorizontal: 20, marginTop:30 }}>
+                <View style = {{justifyContent: 'flex-end',marginBottom: 30,}}>
+                <View style = {{marginHorizontal: 30}}>
                     <Button
-                            title = "Edit Profile"
-                            buttonStyle = {parameter.styledButton}
+                            title = "EDIT PROFILE"
+                            color = 'orange'
+                            style = {{height: 50, justifyContent: 'center'}}
                             titleStyle = {parameter.buttonTitle}
                             onPress = {() => {navigation.navigate("EditProfileScreen")}}
                             />
-                </View> */}
+                </View>
             
-                <View style = {{marginHorizontal: 30 }}>
+                <View style = {{marginHorizontal: 30, marginTop: 25 }}>
                 <Button
                     title = "LOGOUT"
                     color = 'orange'

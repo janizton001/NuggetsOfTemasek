@@ -4,7 +4,7 @@ import {colors} from '../global/style'
 
 
 
-export default function MenuCard({productName,price,image,productDetails,stall, OnPressMenuCard}){
+export default function StallCard({productName,image,productDetails,stall, OnPressMenuCard}){
     return(
         <TouchableOpacity onPress={OnPressMenuCard}>
         <View style ={styles.view1}>
@@ -14,9 +14,8 @@ export default function MenuCard({productName,price,image,productDetails,stall, 
                     <View>
                         <Text style ={styles.text2}>{productDetails} </Text>
                     </View>
-                    <Text style = {styles.text3}>S$ {price == null ? price : price.toFixed(2)}</Text>
                 </View>
-                <View style ={{flex:3,padding: 3}}>
+                <View style ={{flex:3, padding: 5}}>
                      <Image style ={styles.image} source ={{uri:image}} />
                 </View>
             </View>
@@ -35,24 +34,22 @@ const styles =StyleSheet.create({
             shadowColor:"grey",
             borderRadius: 5,
             margin:5,
-            padding:7,
-            height: 110,
-            width: '95%',
-            alignItems: 'center'
+            padding:10,
+            height: 150
 },
 
 view2: {flex:1,
         flexDirection:"row",
         padding:0,
-        justifyContent:"space-between"
+        justifyContent:'space-between'
 },
 
 view3 :{flex:6,
-        justifyContent:"space-around"
+        justifyContent: 'space-around'
         },
 
 text1: {
-    fontSize:15,
+    fontSize:20,
     color:colors.grey1,
     fontWeight:"bold"
     },
@@ -60,7 +57,8 @@ text1: {
     text2:{
         fontSize:15,
         color:colors.grey3,
-        marginRight:2
+        marginRight:2,
+        justifyContent: 'center'
      },
 
 text3:{

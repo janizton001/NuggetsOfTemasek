@@ -17,6 +17,7 @@ export default function ProductScreen({navigation,route}) {
 
     const [product, setProduct] = useState(null) 
     const [restaurant, setRestaurant] = useState(null) 
+    const [stall, setStall] = useState(null) 
     const [count,setCount] = useState(0)
     const [loading, setLoading] = useState(false)
     const {user} = useContext(AuthContext);
@@ -54,8 +55,9 @@ export default function ProductScreen({navigation,route}) {
     }
 
     useEffect( () => {
-        let {item,restaurant} = route.params;
+        let {item,stall, restaurant} = route.params;
         setProduct(item)
+        setStall(stall)
         setRestaurant(restaurant)
     })
 
@@ -79,8 +81,8 @@ export default function ProductScreen({navigation,route}) {
             status: "Not Accepted",
             mobileNo: userData.mobileNumber,
             remarks: remarks,
-            deliveryFee: deliveryFee
-            
+            deliveryFee: deliveryFee,
+            stall: stall.stallName
         })
         .then(() => {
             
@@ -157,7 +159,7 @@ export default function ProductScreen({navigation,route}) {
             <View style = {styles.view3}>
                 <Text style = {styles.text2}> Cost of Food: $ {(product?.price * count).toFixed(2)} </Text>
                 <Text style = {styles.text2}> Delivery Fee: $ {deliveryFee.toFixed(2)}</Text>
-                <Text style = {styles.text2}> TOTAL COST: $ {(deliveryFee + product?.price * count).toFixed(2) }</Text>
+                <Text style = {{fontWeight:"bold", color:'black', fontSize:20,  marginTop: 5}}> TOTAL COST: $ {(deliveryFee + product?.price * count).toFixed(2) }</Text>
             </View>
             
             <View style = {{alignItems: 'center', marginTop: 25}}>

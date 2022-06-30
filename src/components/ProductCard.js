@@ -60,15 +60,16 @@ const styles = StyleSheet.create({
                     color:colors.grey1,
                     }, 
 
-                view4: {width:100,
-                          height:100,
+                view4: {width:130,
+                          height:150,
                           justifyContent: 'center',
+                          alignContent: 'center',
                           marginRight: 5
                         },
 
-                image: {height:100,
-                        width:120,
-                        marginRight: 1
+                image: {height:130,
+                        width:135,
+                        marginRight: 5
                     }
 
 

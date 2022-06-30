@@ -12,7 +12,8 @@ export default function FoodCard({
     address,
     image,
     collectTime,
-    menu
+    menu,
+    stalls,
 }) {
     return(
         <TouchableOpacity onPress={OnPressFoodCard} style ={{...styles.cardView}}>
@@ -58,7 +59,7 @@ export default function FoodCard({
 const styles = StyleSheet.create({
     cardView: {
         marginHorizontal: 5,
-        borderWidth: 2,
+        borderWidth: 3,
         borderRadius: 5,
         borderColor: 'grey',
         marginTop: 10

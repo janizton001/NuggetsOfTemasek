@@ -4,18 +4,19 @@ import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpac
 import { colors, Icon } from 'react-native-elements';
 import { menuDetailedData } from '../global/Data';
 import MenuCard from '../components/MenuCard';
+import StallCard from '../components/StallCard';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-export default function RestaurantScreen({navigation,route}) {
+export default function CanteenScreen({navigation,route}) {
 
-    const [restaurant, setRestaurant] = useState(null) 
-    const [stall, setStall] = useState(null)
+    const [restaurant, setRestaurant] = useState(null)
+    const [stall, setStall] = useState(null) 
 
     useEffect( () => {
-        let {item, restaurant} = route.params;
-        setStall(item)
-        setRestaurant(restaurant)
+        let {item} = route.params;
+        setRestaurant(item)
+        setStall(restaurant?.stalls)
     })
 
     return (
@@ -28,27 +29,28 @@ export default function RestaurantScreen({navigation,route}) {
                     size = {25}
                     onPress ={()=>navigation.goBack()}
                 />
-                <Text style ={styles.text1}>{stall?.stallName}</Text>
+                <Text style ={styles.text1}>{restaurant?.name}</Text>
             </View>
 
                 <FlatList 
                     style ={{backgroundColor:'#F7EDDC', paddingTop: 7}}
-                    data = {stall?.menu}
+                    data = {restaurant?.stalls}
                     keyExtractor = {(item,index)=>index.toString()}
                     showsVerticalScrollIndicator = {true}
                     renderItem = {({item})=>(
                         <View>
-                            <MenuCard 
-                                OnPressMenuCard={ () => {navigation.navigate("ProductScreen", {
+                            
+                            < StallCard
+                                OnPressMenuCard={ () => {navigation.navigate("RestaurantScreen", {
                                     item,
-                                    stall, 
+                                    stall,
                                     restaurant
                                 })}}
-                                productName ={item.meal}
+                                productName ={item.stallName}
                                 image ={item.image}
-                                price ={item.price}
+                                
                                 productDetails = {item.details}
-                                stall  = {stall.stallName}
+                                
                             />
                         </View>
                     )}
