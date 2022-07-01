@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList,} from 'react-native'
 import { colors, Icon } from 'react-native-elements';
@@ -7,8 +7,18 @@ import HomeHeader from '../components/HomeHeader';
 import { restaurantData } from '../global/Data';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
+   
+export default function HomeScreen({navigation, route}) {
+    const [location, setLocation] = useState(null)
 
-export default function HomeScreen({navigation}) {
+  
+    useEffect(() => {
+        if(route.params?.pin) {
+        let {pin} = route.params;
+        setLocation(pin)
+        }
+        
+    }, [route.params?.pin])
 
     return (
         <View style = {styles.container}>
@@ -19,7 +29,7 @@ export default function HomeScreen({navigation}) {
                 <Text style = {{fontSize: 20, fontWeight: "bold", color: colors.grey2}}> Food Options Around NUS </Text>
             </View>
             <View style ={styles.locationAndSortRow} >
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>(navigation.navigate("MapScreen"))}>
                 <View style ={styles.locationButton}>
                     
                     <Icon
