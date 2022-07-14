@@ -11,12 +11,14 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 export default function CanteenScreen({navigation,route}) {
 
     const [restaurant, setRestaurant] = useState(null)
-    const [stall, setStall] = useState(null) 
+    const [stall, setStall] = useState(null)
+    const [location, setLocation] = useState("")  
 
     useEffect( () => {
-        let {item} = route.params;
+        let {item,location} = route.params;
         setRestaurant(item)
         setStall(restaurant?.stalls)
+        setLocation(location)
     })
 
     return (
@@ -44,7 +46,8 @@ export default function CanteenScreen({navigation,route}) {
                                 OnPressMenuCard={ () => {navigation.navigate("RestaurantScreen", {
                                     item,
                                     stall,
-                                    restaurant
+                                    restaurant,
+                                    location
                                 })}}
                                 productName ={item.stallName}
                                 image ={item.image}

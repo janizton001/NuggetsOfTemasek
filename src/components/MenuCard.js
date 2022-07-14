@@ -10,9 +10,9 @@ export default function MenuCard({productName,price,image,productDetails,stall, 
         <View style ={styles.view1}>
             <View style ={styles.view2}>
                 <View style ={styles.view3}>
-                    <Text style ={styles.text1}>{productName}</Text>
+                    <Text style ={styles.text1} numberOfLines={1}>{productName}</Text>
                     <View>
-                        <Text style ={styles.text2}>{productDetails} </Text>
+                        <Text style ={styles.text2} numberOfLines={3}>{productDetails} </Text>
                     </View>
                     <Text style = {styles.text3}>S$ {price == null ? price : price.toFixed(2)}</Text>
                 </View>
@@ -30,15 +30,16 @@ export default function MenuCard({productName,price,image,productDetails,stall, 
 const styles =StyleSheet.create({
 
     view1:{backgroundColor:"white",
-            elevation:4,
+            elevation:2,
             shadowOpacity:0.4,
             shadowColor:"grey",
             borderRadius: 5,
             margin:5,
-            padding:7,
+            padding:8,
             height: 110,
-            width: '95%',
-            alignItems: 'center'
+            width: '100%',
+            alignItems: 'center',
+            alignContent: 'center'
 },
 
 view2: {flex:1,
@@ -52,7 +53,7 @@ view3 :{flex:6,
         },
 
 text1: {
-    fontSize:15,
+    fontSize:16,
     color:colors.grey1,
     fontWeight:"bold"
     },

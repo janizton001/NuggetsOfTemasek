@@ -13,7 +13,7 @@ const ProductCard = ({productName,price,image,restaurant,uid}) => {
                     fontSize:25,
                     color:colors.grey1,
                     fontWeight: "bold"
-                    }}>{restaurant}  </Text>
+                    }} numberOfLines = {3}>{restaurant}  </Text>
                     <Text style ={styles.text1}>{productName}</Text>
                     <Text style ={styles.text1}>S$ {price == null ? price : price.toFixed(2)}</Text>
                 </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
                       margin:10,
                       width:'90%',
                       height: 250,
-                      padding:10,
+                      padding:5,
                       justifyContent:"center",
                       alignItems:"center",
                       marginLeft: 20,
@@ -47,12 +47,13 @@ const styles = StyleSheet.create({
                 view2: {flexDirection:"row",
                         padding:0,
                         justifyContent:"space-between",
-                        width: '80%',
-                        height: '70%'
+                        width: '85%',
+                        height: '80%'
                     },
 
                 view3 : {justifyContent:"space-between",
-                          width:'40%'
+                          width:'40%',
+                          
                         },
 
                 text1: {

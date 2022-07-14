@@ -12,9 +12,24 @@ export default function FoodCard({
     address,
     image,
     collectTime,
+    deliveryLocation,
     menu,
     stalls,
 }) {
+    function getCollectTime(dist) {
+        if(dist == 0) {
+            return " 0 mins"
+        }
+        if(dist < 500) {
+            return "~ 5-10 mins";
+        } else if (dist < 1000) {
+            return " ~ 10-20mins"
+        } else if (dist < 1600) {
+            return "~ 20-30 mins "
+        } else {
+            return "> 30mins"
+        }
+    }
     return(
         <TouchableOpacity onPress={OnPressFoodCard} style ={{...styles.cardView}}>
             <View style ={{width: '100%', borderColor: colors.grey1}}>
@@ -30,9 +45,17 @@ export default function FoodCard({
                 <Text style = {{fontSize: 18, fontWeight: "bold",marginLeft: 10, fontFamily: 'Arial'}}> {name}</Text>
                 </View>
 
-                <View style = {{flex:1, flexDirection: 'row', alignItems: 'center'}}>
+                <View style = {{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 
-                    <View style = {styles.descriptionBox}>
+                <View style = {styles.descriptionBox}>
+                    <Text style = {styles.description}> {address} </Text>
+                        
+                    </View>
+
+                    <View style = {{flex: 4, flexDirection: 'row',alignItems: 'center', flexWrap: 'wrap'}}>
+                   
+                    
+                    <View style = {styles.descriptionBox2}>
                         <Icon
                             name = "place"
                             type = "material"
@@ -40,11 +63,18 @@ export default function FoodCard({
                             size = {17}
                             iconStyle = {{marginTop:3}}
                         />
-                        <Text style = {styles.description}> {distAway} km </Text>
-                    </View>
-
-                    <View style = {{flex: 9, flexDirection: 'row',alignItems: 'center',}}>
-                        <Text style = {styles.description}> {address} </Text>
+                        <Text style = {styles.description}> {distAway} m   </Text>
+                        </View>
+                        <View style = {styles.descriptionBox3}>
+                    <Icon
+                            name = "access-time"
+                            type = "material"
+                            color = {colors.grey3}
+                            size = {17}
+                            iconStyle = {{marginTop:3,marginLeft:5}}
+                        />
+                        <Text style = {styles.description}>{getCollectTime(distAway)} </Text>
+                        </View>
                     </View>
 
                 </View>
@@ -72,22 +102,38 @@ const styles = StyleSheet.create({
     },
 
     descriptionBox : {
-        flex: 4,
-        flexDirection: 'row',
-        paddingHorizontal: 5,
-        paddingTop: 3,
+        flex: 3,
+        flexDirection: 'row', 
+        paddingTop: 2,
         marginLeft: 5,
         borderRightWidth: 1,
         borderRightColor: colors.grey3,
-        paddingBottom: 5,
-        alignItems: 'center'
+        paddingBottom: 4,
+        alignItems: 'center',
     },
-
+    descriptionBox2: {        
+        flexDirection: 'row',
+        paddingRight: 5,
+        paddingTop: 2,
+        marginLeft: 1,
+        borderRightWidth: 1,
+        borderRightColor: colors.grey3,
+        paddingBottom: 4,
+        alignItems: 'center',
+    },
+    descriptionBox3: {       
+        flexDirection: 'row',
+        paddingRight: 5,
+        paddingTop: 2,
+        marginLeft: 1,
+        paddingBottom: 4,
+        alignItems: 'center',
+    },
     description: {
         fontSize: 14, 
         
         color: colors.grey3,
-        marginLeft: 5
+        marginLeft:1
     }
 
     

@@ -19,11 +19,12 @@ export default function ProductScreen({navigation,route}) {
     const [restaurant, setRestaurant] = useState(null) 
     const [stall, setStall] = useState(null) 
     const [count,setCount] = useState(0)
+    const [location, setLocation] = useState("") 
     const [loading, setLoading] = useState(false)
     const {user} = useContext(AuthContext);
     const [userData, setUserData] = useState('');
-    const [remarks, setRemarks] = useState('');
-    const deliveryFee = count == 0 ? 0 : 2;
+    
+    const deliveryFee = count == 0 ? 0 : (0.1 * count * product?.price);
 
     
     const getUser = async() => {
@@ -55,19 +56,16 @@ export default function ProductScreen({navigation,route}) {
     }
 
     useEffect( () => {
-        let {item,stall, restaurant} = route.params;
+        let {item,stall, restaurant, location} = route.params;
         setProduct(item)
         setStall(stall)
         setRestaurant(restaurant)
+        setLocation(location)
     })
 
     const submitOrder = async () => {
-
-        if (remarks == '') {
-            Alert.alert("Please include your location in the remarks box")
-        }
         
-        if(count != 0 && remarks != '') {
+        if(count != 0 && count <15) {
             setLoading(true)
         await db
         .collection('orders')
@@ -80,7 +78,7 @@ export default function ProductScreen({navigation,route}) {
             uid: user.uid,
             status: "Not Accepted",
             mobileNo: userData.mobileNumber,
-            remarks: remarks,
+            remarks: location,
             deliveryFee: deliveryFee,
             stall: stall.stallName
         })
@@ -89,7 +87,6 @@ export default function ProductScreen({navigation,route}) {
             Alert.alert("Order added!", "Please wait for a deliverer to accept your order. You can view your order under My Orders")
             console.log("Order added to db");
             setLoading(false)
-            setRemarks(' ')
         })
         .catch((error) => {
             console.error("Error adding document: ", error);
@@ -126,16 +123,17 @@ export default function ProductScreen({navigation,route}) {
             
             
             
-            <View style = {{alignItems: 'flex-start', marginHorizontal: 20, paddingLeft: 20}}>
-                <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+            <View style = {{alignItems: 'flex-start', marginHorizontal: 20, alignItems: 'center'}}>
+                <View style = {{flexDirection: 'column', alignItems: 'center', flexGrow: 1}}>
                 <Text> Delivery Location:  </Text>
-                    <TextInput
+                <Text style ={{fontWeight: 'bold',fontSize: 16, flexWrap:'wrap',textAlign: 'center'}}> {location}</Text>
+                    {/* <TextInput
                         style = {{width: "60%",backgroundColor: 'white',height: 50, borderRadius: 15,justifyContent: 'flex-end'}}
-                        placeholder = "Location (Include any remarks here)"
+                        placeholder = {restaurant?.deliveryLocation}
                         value={remarks}
                         onChangeText={text => setRemarks(text)}
                         
-                    />
+                    /> */}
                 </View>
             </View>
             <View style = {{justifyContent: 'center', alignItems: 'center',flexDirection: 'row', marginTop: 20, marginBottom:10 }}>
@@ -177,9 +175,9 @@ export default function ProductScreen({navigation,route}) {
             
             
             </ScrollView>
-            <View style = {{alignItems: 'center'}}>
+            {/* <View style = {{alignItems: 'center'}}>
                 <Text>*Delivery Fee is fixed at $2 for all deliveries</Text>
-            </View>
+            </View> */}
             
             </KeyboardAvoidingView>
             

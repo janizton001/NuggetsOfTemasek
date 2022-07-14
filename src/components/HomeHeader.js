@@ -6,7 +6,7 @@ import { colors,parameter } from '../global/style';
 
 export default function HomeHeader() {
 
-    const CartIcon = withBadge(0)(Icon)
+    
 
     return (
         <View style = {styles.header}> 
@@ -19,17 +19,18 @@ export default function HomeHeader() {
                 />
             </View> */}
 
-            <View style = {{justifyContent: 'center', alignItems:'center'}}> 
+            <View style = {{paddingHorizontal: 70}}> 
                 <Text style = {{color: "white", fontSize :26, fontWeight : "bold"}}> Nuggets of NUS</Text>
             </View>
-            {/* <View style ={{}}>
-                <CartIcon 
+            <View style ={{}}>
+                <Icon 
                 type ="material-community"
-                name = "bell"
+                name = "magnify"
                 size = {32} 
                 color = "white"
+                onPress={() => {}}
             />
-            </View> */}
+            </View>
         </View>
 
 
@@ -38,10 +39,13 @@ export default function HomeHeader() {
 
 const styles = StyleSheet.create({
     header: {
+        alignSelf: 'stretch',
         flexDirection: "row" ,
         backgroundColor: "orange",
         height: parameter.headerHeight, 
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent:'center',
+        alignItems: 'center',
+        
         },
+
 })

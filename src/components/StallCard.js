@@ -12,7 +12,7 @@ export default function StallCard({productName,image,productDetails,stall, OnPre
                 <View style ={styles.view3}>
                     <Text style ={styles.text1}>{productName}</Text>
                     <View>
-                        <Text style ={styles.text2}>{productDetails} </Text>
+                        <Text style ={styles.text2} numberOfLines = {4}>{productDetails} </Text>
                     </View>
                 </View>
                 <View style ={{flex:3, padding: 5}}>

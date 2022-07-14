@@ -47,7 +47,7 @@ export default function MyAccountScreen({navigation}) {
                         />
                         </TouchableOpacity>
                     </View>
-                    <ScrollView style = {{backgroundColor:'#F7EDDC'}}>
+                    
                     <View style = {styles.profileView}>
                         <Text style ={styles.profileHeader}>
                             Email :   
@@ -83,7 +83,7 @@ export default function MyAccountScreen({navigation}) {
                         {userData.mobileNumber}
                         </Text>
                     </View>
-                 </ScrollView>  
+                   
                  </View>
                    
                 <View style = {{justifyContent: 'flex-end',marginBottom: 30,}}>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
 
     profileView: {
-        marginTop: 10,
+        
          marginLeft: 15,
          flexDirection: 'row',
          alignItems: 'center',

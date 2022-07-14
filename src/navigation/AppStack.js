@@ -11,6 +11,7 @@ import ProductScreen from '../screens/ProductScreen';
 import MyDeliveriesScreen from '../screens/MyDeliveriesScreen';
 import CanteenScreen from '../screens/CanteenScreen';
 import MapScreen from '../screens/MapScreen';
+import SearchScreen from '../screens/SearchScreen';
 
 const App = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,6 +37,14 @@ const HomeStack = ({navigation}) => (
         <App.Screen
         name="MapScreen"
         component={MapScreen}
+        options ={{
+            headerShown: false,
+          }} 
+        />
+
+        <App.Screen
+        name="SearchScreen"
+        component= {SearchScreen}
         options ={{
             headerShown: false,
           }} 

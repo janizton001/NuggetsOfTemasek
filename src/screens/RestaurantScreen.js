@@ -11,11 +11,13 @@ export default function RestaurantScreen({navigation,route}) {
 
     const [restaurant, setRestaurant] = useState(null) 
     const [stall, setStall] = useState(null)
+    const [location, setLocation] = useState("")  
 
     useEffect( () => {
-        let {item, restaurant} = route.params;
+        let {item, restaurant, location} = route.params;
         setStall(item)
         setRestaurant(restaurant)
+        setLocation(location)
     })
 
     return (
@@ -32,7 +34,7 @@ export default function RestaurantScreen({navigation,route}) {
             </View>
 
                 <FlatList 
-                    style ={{backgroundColor:'#F7EDDC', paddingTop: 7}}
+                    style ={{backgroundColor:'#F7EDDC', paddingTop: 7, paddingRight: 10}}
                     data = {stall?.menu}
                     keyExtractor = {(item,index)=>index.toString()}
                     showsVerticalScrollIndicator = {true}
@@ -42,7 +44,8 @@ export default function RestaurantScreen({navigation,route}) {
                                 OnPressMenuCard={ () => {navigation.navigate("ProductScreen", {
                                     item,
                                     stall, 
-                                    restaurant
+                                    restaurant,
+                                    location
                                 })}}
                                 productName ={item.meal}
                                 image ={item.image}
@@ -68,7 +71,8 @@ const styles = StyleSheet.create({
       container:{flex:1,
                  top:0,
                  left:0,
-                 right:0
+                 right:0,
+                 justifyContent: 'center'
          },
     
     view1:{
@@ -82,32 +86,13 @@ const styles = StyleSheet.create({
     
     text1:{
         fontWeight:"bold",
-          marginLeft:40,
+          marginLeft:85,
           color: 'white',
           fontSize:20
         },
     
     view2:{marginTop:5,
           paddingBottom:20
-        },
-    
-    tab:{ paddingTop :0,
-          backgroundColor:colors.buttons,
-          justifyContent:"space-between",
-          },
-    
-    tabContainer:{ alignItems:'center',
-          alignContent:'center',
-          justifyContent:'center',
-          },
-    
-    tabLabel:{fontWeight:'bold',
-          color: colors.cardbackground
-          },
-      
-    tabStyle:{width:SCREEN_WIDTH/4,
-              maxHeight:45,
-            },
-    scene2: { backgroundColor: '#673ab7' } 
+    }
 
 })

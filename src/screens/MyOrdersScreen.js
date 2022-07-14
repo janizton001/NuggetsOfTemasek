@@ -137,7 +137,6 @@ export default function MyOrdersScreen() {
            
             setOrders(list);
             setIsFetching(false);
-            console.log(list)
 
         } catch (e) {
             console.log(e)
