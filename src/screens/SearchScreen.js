@@ -1,12 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Component} from 'react';
 
 import {SafeAreaView, View, Text, StyleSheet, Dimensions,TextInput,TouchableOpacity,ScrollView, FlatList,} from 'react-native'
 import { colors, Icon } from 'react-native-elements';
-import { menuDetailedData } from '../global/Data';
+import { menuDetailedData, restaurantData } from '../global/Data';
 import MenuCard from '../components/MenuCard';
+import StallCard from '../components/StallCard';
 
-export default function SearchScreen({navigation,route}) {
+import FoodCard from '../components/FoodCard';
 
+
+export default function SearchScreen({navigation, route}) {
+
+    const [data, setData] = useState(restaurantData)
+    // const [stallData, setStallData] = useState(null)
+    const [location, setLocation] = useState("")
+
+    
+    const searchName = (input) => {
+        let data = restaurantData
+        const searchData = data.filter((item) => (
+            item.name.toLowerCase().includes(input))
+                
+        )  
+        console.log(searchData)
+        setData(searchData)
+    }
+
+    useEffect( () => {
+        let {location} = route.params
+        setLocation(location)
+    }, [])
 
     return (
         <View style ={styles.container}>
@@ -27,20 +50,42 @@ export default function SearchScreen({navigation,route}) {
                    <TextInput
                     style = {{backgroundColor: 'white',height: 35, borderRadius: 5,justifyContent: 'flex-end', borderWidth: 1, borderColor: 'grey'}}
                     placeholder = "Search"
+                    
+                    onChangeText = {text => searchName(text)}
                    />
                 </View>
                  <View style = {{marginRight: 20}}> 
-                <Icon
+                 <Icon
                     type = "material-community"
                     name = "tune"
                     color = {colors.grey1}
                     size = {25}
-                    />
+                    /> 
+
                 </View> 
             </View>
-            <View>
-                <Text> </Text>
-            </View>
+            <FlatList 
+                style ={{backgroundColor:'#F7EDDC', paddingTop: 5}}
+                data = {data}
+                keyExtractor = {(item,index)=>index.toString()}
+                showsVerticalScrollIndicator = {true}  
+                renderItem = {({item})=>(
+                    <View>
+                        
+                        < StallCard
+                            OnPressMenuCard={ () => {navigation.navigate("CanteenScreen", {
+                                item,
+                                location,
+                            })}}
+                            productName ={item.name}
+                             image ={item.image}
+                            // productDetails = {item.details}
+                            
+                        />
+                    </View>
+                )}
+                
+            />
         </View>
     )
 }

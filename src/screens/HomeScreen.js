@@ -38,7 +38,7 @@ export default function HomeScreen({navigation, route}) {
                 name = "magnify"
                 size = {32} 
                 color = "white"
-                onPress={() => {navigation.navigate("SearchScreen")}}
+                onPress={() => {navigation.navigate("SearchScreen", {location})}}
             />
             </View>
         </View>
