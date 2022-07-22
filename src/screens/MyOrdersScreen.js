@@ -10,7 +10,7 @@ import { AuthContext } from '../navigation/AuthContext';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-export default function MyOrdersScreen() {
+export default function MyOrdersScreen({navigation,route}) {
 
     const [orders, setOrders] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
@@ -26,8 +26,9 @@ export default function MyOrdersScreen() {
                                                 deliveryFee: 0, 
                                                 quantity: 0
                                             });
+  
     
-
+  
     const ItemBox = (props) => {
         const leftSwipe = (progress, dragX) => {
           const scale = dragX.interpolate({
@@ -46,8 +47,14 @@ export default function MyOrdersScreen() {
                         </Animated.Text>
                 </View>
             </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.6}>
+            
+            
+            <TouchableOpacity activeOpacity={0.6}
+            onPress = {() => {navigation.navigate("EditOrderScreen",  {
+                props
+                })}}
+               >
+                
                 <View style={styles.editBox}>
                     <Animated.Text style={{transform: [{scale: scale}]}}>
                         Edit
@@ -190,6 +197,8 @@ export default function MyOrdersScreen() {
                             deliveryFee = {item.deliveryFee}
                         />
                     )}
+
+
 
                 
                 />
