@@ -40,11 +40,11 @@ export default function SearchScreen({navigation, route}) {
                     size = {25}
                     onPress ={()=>navigation.goBack()}
                 />
-                <Text style ={styles.text1}> Search Restaurant</Text>
+                <Text style ={styles.text1}> Restaurant Search </Text>
             </View>
 
             <View style ={styles.locationAndSortRow} >
-                <View style = {{width: '80%'}}>
+                <View style = {{width: '100%'}}>
                     
                    <TextInput
                     style = {{backgroundColor: 'white',height: 35, borderRadius: 5,justifyContent: 'flex-end', borderWidth: 1, borderColor: 'grey'}}
@@ -53,7 +53,7 @@ export default function SearchScreen({navigation, route}) {
                     onChangeText = {text => searchName(text)}
                    />
                 </View>
-                 <View style = {{marginRight: 20}}> 
+                 {/* <View style = {{marginRight: 20}}> 
                  <Icon
                     type = "material-community"
                     name = "tune"
@@ -61,7 +61,7 @@ export default function SearchScreen({navigation, route}) {
                     size = {25}
                     /> 
 
-                </View> 
+                </View>  */}
             </View>
             <FlatList 
                 style ={{backgroundColor:'#F7EDDC', paddingTop: 5}}

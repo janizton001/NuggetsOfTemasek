@@ -18,7 +18,7 @@ export default function HomeScreen({navigation, route}) {
 
   
     useEffect(() => {
-        if(route.params?.location) {
+        if(route.params?.location && route.params?.pin) {
         let {location, pin} = route.params;
         setLocation(location)
         setPin(pin)

@@ -3,6 +3,10 @@ export const restaurantData = [
   distAway: "1.2", 
   address: "2 Computing Drive", 
   image: "https://uci.nus.edu.sg/oca/wp-content/uploads/sites/9/2018/05/deck.jpg",
+  coordinates: {
+    latitude:1.2944739859159593,
+    longitude: 103.77254620673452
+} ,
   collectTime: 5,
   stalls: [{
     stallName: "Western Stall",
@@ -77,11 +81,15 @@ export const restaurantData = [
 ] 
 }
 ]}, 
-  {name: "Science Canteen Frontier", 
+  {name: "The Frontier", 
   distAway: "1.2", 
   address: "12 Science Drive 2", 
   image: "https://uci.nus.edu.sg/oca/wp-content/uploads/sites/9/2018/05/Frontier-Canteen-768x513.jpg",
   collectTime: 5,
+  coordinates: {
+    latitude:1.2965688314100976, 
+    longitude: 103.78034874758642
+},
   stalls: [{
     stallName: "Chef's Wok",
     image:"https://uci.nus.edu.sg/oca/wp-content/uploads/sites/9/2021/10/20211004_173339-e1634282543579-768x704.jpg",
@@ -157,6 +165,10 @@ menu:[
   {name: "Supper Stretch", 
   distAway: "1.2", 
   address: "15 - 22 Clementi Rd", 
+  coordinates: {
+    latitude:1.2930616477860788, 
+    longitude:  103.76873715064347
+  } ,
   image: "https://images.squarespace-cdn.com/content/v1/5d384dbfb84cd4000124c0b8/1582555481024-HRJETA1GDVLUAGOXIW0D/hpb2.jpg?format=1000w",
   collectTime: 5,
   stalls: [{

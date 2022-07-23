@@ -87,7 +87,7 @@ export default function MyAccountScreen({navigation}) {
                  </View>
                    
                 <View style = {{justifyContent: 'flex-end',marginBottom: 30,}}>
-                <View style = {{marginHorizontal: 30}}>
+                {/* <View style = {{marginHorizontal: 30}}>
                     <Button
                             title = "EDIT PROFILE"
                             color = 'orange'
@@ -95,7 +95,7 @@ export default function MyAccountScreen({navigation}) {
                             titleStyle = {parameter.buttonTitle}
                             onPress = {() => {navigation.navigate("EditProfileScreen")}}
                             />
-                </View>
+                </View> */}
             
                 <View style = {{marginHorizontal: 30, marginTop: 25 }}>
                 <Button
