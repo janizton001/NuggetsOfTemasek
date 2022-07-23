@@ -84,9 +84,11 @@ export default function MapScreen({navigation, route}) {
                 }}
                 provider = 'google'
             > 
-            
-                <Button
+            <View style = {{position: 'absolute', width: '100%'}}> 
+
+            <Button
                 title = "Set location"
+                
                 contentContainerStyle = {{height: 70}}
                 color = 'orange'
                 tintColor = 'white'
@@ -101,7 +103,7 @@ export default function MapScreen({navigation, route}) {
                   })                  
                 }}
               }
-               />                            
+               />                    
               <Polygon 
                 coordinates={coordinate}
                 strokeColor = 'orange'
@@ -161,7 +163,7 @@ export default function MapScreen({navigation, route}) {
                     }}      
                     pinColor = 'red'            
                 />
-                                         
+              </View>                   
             </MapView>
          
             <Modal
