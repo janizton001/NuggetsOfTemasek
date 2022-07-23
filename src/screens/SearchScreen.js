@@ -5,7 +5,6 @@ import { colors, Icon } from 'react-native-elements';
 import { menuDetailedData, restaurantData } from '../global/Data';
 import MenuCard from '../components/MenuCard';
 import StallCard from '../components/StallCard';
-
 import FoodCard from '../components/FoodCard';
 
 
@@ -41,7 +40,7 @@ export default function SearchScreen({navigation, route}) {
                     size = {25}
                     onPress ={()=>navigation.goBack()}
                 />
-                <Text style ={styles.text1}> Search </Text>
+                <Text style ={styles.text1}> Search Restaurant</Text>
             </View>
 
             <View style ={styles.locationAndSortRow} >
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
     
     text1:{
         fontWeight:"bold",
-          marginLeft:120,
+          marginLeft:65,
           color: 'white',
           fontSize:24
         },
@@ -123,7 +122,6 @@ const styles = StyleSheet.create({
              marginTop: 15, 
              justifyContent: "space-between",
              marginHorizontal: 10,
-             
              
         },
 })

@@ -1,7 +1,8 @@
 # Nuggets of NUS Project READMe
+Done by Jonathan Tan and Marcus Kok for Orbital 2022
 ## Project Scope
 
-A Food delivery app for NUS students. 
+Welcome to Nuggest of NUS, a Food delivery app for NUS students. 
 
 We hope to make the process of getting delivered food cheap and accessible to all NUS residents given their busy schedules while also providing opportunities to NUS students to make some extra allowance by delivering food for their peers. As such, NUS students can choose to use the app to order food or to help takeaway food for other students.
 
@@ -24,11 +25,11 @@ This Mobile App provides a platform for both Users and Deliverers. On the interf
 
 Below are a list of additional features to improve user experience for both Users and Deliverers:
 
-1. ‘Edit’ Functions: Edit Orders and edit profile functions
+1. Edit Order: Edit Orders after placing them the first time
+1.  Edit Profile: Edit Profile details
 1. Stalls Screen: Include individual canteen stalls and their menus
 1. Restaurant Map View: Map function to show ordering location and how far delivery is.
-1. Delivery Fee by Distance:  As the restuarants distance can now be determined, the delivery fee should now be able to vary based on distance from order location. 
-1. Search engine: Users can search for type of food or canteen in a search bar
+1. Search engine: Users can search for a canteen in a search bar
 1. Ratings: Users can also rate the service of the deliverer after every delivery.
 
 ## Link to full ReadME

@@ -38,7 +38,13 @@ export default function HomeScreen({navigation, route}) {
                 name = "magnify"
                 size = {32} 
                 color = "white"
-                onPress={() => {navigation.navigate("SearchScreen", {location})}}
+                onPress={() => {
+                    if (location == "Current Location"){ 
+                        Alert.alert("Please set your delivery location first")
+                    } else {
+                    navigation.navigate("SearchScreen", {location})
+                }}}
+                    
             />
             </View>
         </View>
@@ -76,13 +82,13 @@ export default function HomeScreen({navigation, route}) {
                         <View> 
                             <FoodCard 
                                 OnPressFoodCard={ () => {
-                                    // if (location == "Current Location"){ 
-                                    //     Alert.alert("Please set your delivery location first")
-                                    // } else {
+                                    if (location == "Current Location"){ 
+                                        Alert.alert("Please set your delivery location first")
+                                    } else {
                                         navigation.navigate("CanteenScreen", {
                                     item,
                                     location
-                                })}}//}
+                                })}}}
                                 screenWidth={SCREEN_WIDTH * 0.90}
                                 image = {item.image}
                                 name = {item.name}
