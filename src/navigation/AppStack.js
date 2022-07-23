@@ -12,6 +12,7 @@ import MyDeliveriesScreen from '../screens/MyDeliveriesScreen';
 import CanteenScreen from '../screens/CanteenScreen';
 import MapScreen from '../screens/MapScreen';
 import SearchScreen from '../screens/SearchScreen';
+import EditOrderScreen from '../screens/EditOrderScreen';
 
 const App = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -73,6 +74,13 @@ const OrderStack = ({navigation}) => (
         <App.Screen
         name ="MyOrdersScreen"
         component ={MyOrdersScreen}
+        options ={{
+            headerShown: false,
+          }} 
+        />
+        <App.Screen
+        name ="EditOrderScreen"
+        component ={EditOrderScreen}
         options ={{
             headerShown: false,
           }} 
