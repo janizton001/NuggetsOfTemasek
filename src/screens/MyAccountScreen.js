@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     },
 
     profileHeader: {
-        fontSize :18, fontWeight : "bold", fontFamily: 'Verdana'
+        fontSize :18, fontWeight : "bold"
     },
 
     profileText: {

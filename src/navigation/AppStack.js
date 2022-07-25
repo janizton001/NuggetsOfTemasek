@@ -132,6 +132,7 @@ export default function AppStack(){
                 component ={HomeStack}
                 options ={
                     {   
+                        headerShown: false,
                         tabBarLabel : "Home",
                         tabBarIcon: ({color,size})=>(
                             <Icon 
@@ -148,7 +149,8 @@ export default function AppStack(){
                 name = "Orders"
                 component = {OrderStack}
                 options ={
-                    {
+                    {   
+                        headerShown: false,
                         tabBarLabel : "My Orders",
                         tabBarIcon: ({color,size})=>(
                             <Icon 
@@ -167,7 +169,8 @@ export default function AppStack(){
                 name = "Deliveries"
                 component = {DeliveryStack}
                 options ={
-                    {
+                    {   
+                        headerShown: false,
                         tabBarLabel : "Deliveries",
                         tabBarIcon: ({color,size})=>(
                             <Icon 
@@ -185,7 +188,8 @@ export default function AppStack(){
                 name = "Account"
                 component = {AccountStack}
                 options ={
-                    {
+                    {   
+                        headerShown: false,
                         tabBarLabel : "My Account",
                         tabBarIcon: ({color,size})=>(
                             <Icon 

@@ -71,24 +71,11 @@ export default function MapScreen({navigation, route}) {
                   strictbounds: true,
                 }}
               />
-            </View>
+                     </View>
             <View>
-            
-            <MapView 
-                style={styles.map}
-                region = {{
-                    latitude: pin.latitude,
-                    longitude: pin.longitude,
-                    latitudeDelta: 0.008,
-                    longitudeDelta: 0.009
-                }}
-                provider = 'google'
-            > 
-            <View style = {{position: 'absolute', width: '100%'}}> 
-
             <Button
                 title = "Set location"
-                
+
                 contentContainerStyle = {{height: 70}}
                 color = 'orange'
                 tintColor = 'white'
@@ -100,17 +87,30 @@ export default function MapScreen({navigation, route}) {
                   navigation.navigate("HomeScreen", {
                   location,
                   pin
-                  })                  
+                  })
                 }}
               }
-               />                    
+               />  
+            <MapView 
+                style={styles.map}
+                region = {{
+                    latitude: pin.latitude,
+                    longitude: pin.longitude,
+                    latitudeDelta: 0.008,
+                    longitudeDelta: 0.009
+                }}
+                provider = 'google'
+            >
+            <View style = {{position: 'absolute', width: '100%'}}> 
+
+               
               <Polygon 
                 coordinates={coordinate}
                 strokeColor = 'orange'
                 strokeWidth={4}
                 fillColor = 'rgba(229,188,85,0.2)'
-              >              
-              </Polygon>
+              />
+
               <Marker
                     title = "Current Location"
                     description = "Type your location in the Search Bar!"
@@ -164,7 +164,7 @@ export default function MapScreen({navigation, route}) {
                     pinColor = 'red'            
                 />
               </View>                   
-            </MapView>
+              </MapView>
          
             <Modal
                     animationType="slide"
